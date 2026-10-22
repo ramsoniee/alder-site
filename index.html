@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title data-en="Alder">Alder</title>
+<meta name="description" content="Alder">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout: тихий каталог мастерской. Широкая сетка, крупный serif-тезис, реестр проектов со статусами вместо витрины карточек. */
+:root{
+  --bg:#f1ede4; --surface:#faf8f3; --surface2:#e8e3d6; --ink:#1d2822; --muted:#666e64; --line:#d8d2c2;
+  --accent:#2f5d46; --accent-ink:#f5f7f2; --pa:#2f5d46; --pa-soft:#dfe8e0;
+  --ok:#2f6a4a; --warn:#9a6a14; --wip:#2f6f7a;
+  --f-display:"Spectral","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --f-body:"Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:14px; --shadow:0 1px 2px rgba(29,40,34,.06),0 8px 24px rgba(29,40,34,.07);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131915; --surface:#1a221d; --surface2:#232d27; --ink:#e8ebe3; --muted:#9aa398; --line:#2d3830;
+  --accent:#8fbf9f; --accent-ink:#0f1a13; --pa:#8fbf9f; --pa-soft:#22302a;
+  --ok:#8fcfa6; --warn:#e0b45a; --wip:#85c4cd;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131915; --surface:#1a221d; --surface2:#232d27; --ink:#e8ebe3; --muted:#9aa398; --line:#2d3830;
+  --accent:#8fbf9f; --accent-ink:#0f1a13; --pa:#8fbf9f; --pa-soft:#22302a;
+  --ok:#8fcfa6; --warn:#e0b45a; --wip:#85c4cd;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+/* акценты проектов: переопределяют --pa на странице проекта */
+.pg.p-cozy{--pa:#2f857b;--pa-soft:#d9eeea}
+.pg.p-tarelka{--pa:#b6613f;--pa-soft:#f3e2d8}
+.pg.p-selfaware{--pa:#2b6a75;--pa-soft:#d9e8ea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pg.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
+  :root:not([data-theme="light"]) .pg.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
+  :root:not([data-theme="light"]) .pg.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}}
+:root[data-theme="dark"] .pg.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
+:root[data-theme="dark"] .pg.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
+:root[data-theme="dark"] .pg.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  -webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pa);outline-offset:3px;border-radius:6px}
+html[lang="en"] .ru{display:none!important} html[lang="ru"] .en{display:none!important}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.08;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,6.4vw,4.6rem)} h2{font-size:clamp(1.8rem,4vw,2.7rem)} h3{font-size:1.35rem;line-height:1.2}
+h1 em,h2 em{font-style:italic;color:var(--pa)}
+p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
+.mono,.label{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:clamp(1.05rem,2vw,1.28rem);color:var(--muted);max-width:56ch}
+
+/* шапка */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-size:1.7rem;text-decoration:none;letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px}
+.brand small{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+nav a.nl{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:999px;font-size:.95rem}
+nav a.nl:hover,nav a.nl[aria-current]{color:var(--ink);background:var(--surface2)}
+.tgl{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.tgl button{font:inherit;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;border:0;background:none;color:var(--muted);padding:7px 11px;cursor:pointer}
+.tgl button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tgl.sq button{padding:7px 10px}
+
+/* кнопки, чипы */
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:500;font-size:1rem;padding:13px 22px;border-radius:999px;
+  background:var(--pa);color:var(--accent-ink);border:1px solid var(--pa);cursor:pointer}
+.pg.p-cozy .btn,.pg.p-tarelka .btn,.pg.p-selfaware .btn{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pg.p-cozy .btn,:root:not([data-theme="light"]) .pg.p-tarelka .btn,:root:not([data-theme="light"]) .pg.p-selfaware .btn{color:#101010}}
+:root[data-theme="dark"] .pg.p-cozy .btn,:root[data-theme="dark"] .pg.p-tarelka .btn,:root[data-theme="dark"] .pg.p-selfaware .btn{color:#101010}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:none;color:var(--ink)!important;border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink);filter:none}
+.btn.is-empty,.is-empty{border-style:dashed;opacity:.65;cursor:default;pointer-events:none}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 11px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.chip.live{color:var(--ok)} .chip.sale{color:var(--warn)} .chip.wip{color:var(--wip)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(28px,6vw,72px) clamp(36px,6vw,72px)}
+.hero>*{min-width:0}
+.hero h1{margin:18px 0 22px}
+.hero .row{margin-top:28px}
+.hero.single{grid-template-columns:1fr}
+
+/* окно-заглушка под ролик */
+.frame{border-radius:var(--r);overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.frame .bar{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface2)}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.frame .bar span{margin-left:8px;font-family:var(--f-mono);font-size:.68rem;color:var(--muted);letter-spacing:.04em}
+.frame .stage{aspect-ratio:16/10;max-width:100%;display:grid;place-items:center;text-align:center;padding:20px;
+  background:radial-gradient(120% 90% at 20% 10%,var(--pa-soft),transparent 60%),radial-gradient(90% 80% at 90% 100%,var(--surface2),transparent 60%),var(--surface)}
+.frame .stage b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.35rem;margin-bottom:6px}
+.frame .stage small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+.frame .stage .play{width:44px;height:44px;border-radius:50%;border:1px solid var(--pa);display:grid;place-items:center;margin:0 auto 12px;color:var(--pa)}
+.frame.hot .stage{aspect-ratio:16/11}
+
+/* секции */
+.sec{padding-block:clamp(40px,7vw,88px);border-top:1px solid var(--line)}
+.sec>.head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;margin-bottom:36px;align-items:end}
+.sec>.head p{margin:0;color:var(--muted)}
+.sec>.head .label{display:block;margin-bottom:12px}
+
+/* реестр проектов */
+.ledger{border-top:1px solid var(--ink)}
+.item{display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,1.5fr) auto 24px;gap:22px;align-items:center;padding:24px 4px;border-bottom:1px solid var(--line);text-decoration:none}
+.item:hover{background:var(--surface)}
+.item:hover .arr{transform:translateX(5px)}
+.item .ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-family:var(--f-display);font-size:1.7rem;color:var(--pa);background:var(--pa-soft);overflow:hidden}
+.item .ic img{width:100%;height:100%;object-fit:cover}
+.item h3{font-size:1.7rem}
+.item .what{color:var(--muted);font-size:.98rem}
+.item .meta{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.05em;color:var(--muted);text-align:right;white-space:nowrap}
+.arr{font-size:1.4rem;transition:transform .2s}
+.item.p-cozy{--pa:#2f857b;--pa-soft:#d9eeea}.item.p-tarelka{--pa:#b6613f;--pa-soft:#f3e2d8}.item.p-selfaware{--pa:#2b6a75;--pa-soft:#d9e8ea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}:root:not([data-theme="light"]) .item.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}:root:not([data-theme="light"]) .item.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}}
+:root[data-theme="dark"] .item.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}:root[data-theme="dark"] .item.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}:root[data-theme="dark"] .item.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}
+
+/* карточки, списки */
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.card h3{margin-bottom:10px}
+.card p{margin:0;color:var(--muted);font-size:.98rem}
+.card .label{display:block;margin-bottom:14px;color:var(--pa)}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.list li{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:24px 1fr;gap:10px}
+.list li:first-child{border-top:1px solid var(--line)}
+.list li::before{content:"";width:9px;height:9px;border-radius:50%;margin-top:.55em;background:var(--ok)}
+.list.todo li::before{background:none;border:1.5px solid var(--wip)}
+.list b{font-weight:600}
+.list span.d{display:block;color:var(--muted);font-size:.95rem}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.two.top-al{align-items:start}
+.two.flip>:first-child{order:2}
+.two .txt h3{font-size:clamp(1.6rem,3vw,2.1rem);margin-bottom:14px}
+.two .txt p{color:var(--muted)}
+.demo{padding-block:28px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border-top:1px solid var(--ink)}
+.nums div{padding:22px 18px 22px 0;border-bottom:1px solid var(--line)}
+.nums b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1;color:var(--pa);font-variant-numeric:tabular-nums}
+.nums div>span{font-size:.9rem;color:var(--muted);display:block;margin-top:8px}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 26px;padding:0;list-style:none}
+.flow li{font-family:var(--f-mono);font-size:.78rem;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.flow li+li::before{content:"→";margin-right:10px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tags li{font-family:var(--f-mono);font-size:.76rem;padding:6px 12px;border-radius:8px;background:var(--surface2);color:var(--ink)}
+
+/* телефоны Tarelka */
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;align-items:start}
+.phone{border-radius:26px;border:6px solid var(--ink);background:var(--ink);overflow:hidden;box-shadow:var(--shadow);max-width:230px;width:100%;margin-inline:auto}
+.phone img{width:100%;aspect-ratio:390/844;object-fit:cover}
+.phone.big{max-width:270px}
+.cap{font-family:var(--f-mono);font-size:.7rem;color:var(--muted);text-align:center;margin-top:10px;letter-spacing:.04em}
+.theme-light{display:block}.theme-dark{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-light{display:none}:root:not([data-theme="light"]) .theme-dark{display:block}}
+:root[data-theme="dark"] .theme-light{display:none}:root[data-theme="dark"] .theme-dark{display:block}
+.price{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.price .card.best{border-color:var(--pa);box-shadow:inset 0 0 0 1px var(--pa)}
+.price b{font-family:var(--f-display);font-weight:400;font-size:2.2rem;display:block;line-height:1.1}
+.note{font-size:.9rem;color:var(--muted);border-left:2px solid var(--pa);padding:4px 0 4px 16px;margin:0 0 1em;max-width:70ch}
+details{border-bottom:1px solid var(--line);padding:16px 0}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+details[open] summary::after{content:"–"}
+details p{margin:12px 0 0;color:var(--muted)}
+
+/* подвал */
+.foot{border-top:1px solid var(--ink);padding-block:36px 48px;margin-top:20px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:32px}
+.foot>*{min-width:0}
+.foot p{font-size:.9rem;color:var(--muted);margin:0 0 .6em}
+.foot a{text-decoration:none;border-bottom:1px solid var(--line)}
+.foot a:hover{border-color:var(--ink)}
+.foot .label{display:block;margin-bottom:12px}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px)}
+.mail{display:inline-block;font-family:var(--f-display);font-size:clamp(1.4rem,3.2vw,2rem);border-bottom:1px solid var(--ink);text-decoration:none;margin-top:6px;word-break:break-all}
+.mail.is-empty{opacity:.55;border-bottom-style:dashed}
+.back{display:inline-block;margin-top:18px;font-size:.92rem;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--ink)}
+
+@media (max-width:880px){
+  .hero,.two,.about,.sec>.head,.foot{grid-template-columns:minmax(0,1fr)}
+  .two.flip>:first-child{order:0}
+  .item{grid-template-columns:56px minmax(0,1fr) auto;gap:6px 16px}
+  .item .what{grid-column:2/4;grid-row:2}
+  .item .meta{display:none}
+  .item .ic{grid-row:1/3;align-self:start}
+  .arr{display:none}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .item{grid-template-columns:48px minmax(0,1fr)}
+  .item .chip{grid-column:2;justify-self:start}
+  .item .what{grid-column:2}
+  .item .ic{width:48px;height:48px}
+  .top{gap:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.item .plat{display:block;margin-top:8px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;color:var(--pa)}
+
+</style>
+</head><body><div class="pg " id="pg"><div class="wrap"><header class="top">
+<a class="brand" href="index.html" aria-label="Alder">Alder <small><span class="ru">разработка</span><span class="en">software</span></small></a>
+<nav aria-label="Основное меню" data-aria-label-en="Main">
+<a class="nl" href="index.html#projects" ><span class="ru">Проекты</span><span class="en">Projects</span></a>
+<a class="nl" href="index.html#about" ><span class="ru">Обо мне</span><span class="en">About</span></a>
+<span class="tgl" role="group" aria-label="Язык" data-aria-label-en="Language"><button type="button" data-lang-btn="ru" aria-pressed="true">RU</button><button type="button" data-lang-btn="en" aria-pressed="false">EN</button></span>
+<span class="tgl sq" role="group" aria-label="Тема" data-aria-label-en="Theme"><button type="button" data-theme-btn="system" aria-pressed="true" title="Как в системе" data-title-en="System">◐</button><button type="button" data-theme-btn="light" aria-pressed="false" title="Светлая" data-title-en="Light">☀</button><button type="button" data-theme-btn="dark" aria-pressed="false" title="Тёмная" data-title-en="Dark">☾</button></span>
+</nav></header></div>
+<main class="wrap">
+
+<section class="hero">
+  <div>
+    <span class="chip live"><span class="ru">Один разработчик, три продукта</span><span class="en">One developer, three products</span></span>
+    <h1><span class="ru">Делаю программы <em>целиком</em>: от интерфейса до сервера.</span><span class="en">I build software <em>end to end</em>, from interface to server.</span></h1>
+    <p class="lead"><span class="ru">Alder — студия одного разработчика. Есть главный продукт, который постоянно развивается, второй уже в продаже и третий, который пока проверяю на себе.</span><span class="en">Alder is a one-person studio. One flagship product that keeps evolving, a second one already on sale, and a third that I am still testing on myself.</span></p>
+    <div class="row">
+      <a class="btn" href="cozydub.html"><span class="ru">Смотреть CozyDub</span><span class="en">See CozyDub</span></a>
+      <a class="btn ghost" href="#projects"><span class="ru">Все проекты</span><span class="en">All projects</span></a>
+    </div>
+  </div>
+  <div class="frame hot"><div class="bar"><i></i><i></i><i></i><span>CozyDub</span></div>
+    <img src="assets/cozydub-room.webp" alt="Комната отдыха в CozyDub" data-alt-en="The Lounge in CozyDub" width="800" height="500" style="width:100%;height:auto"></div>
+</section>
+
+<section class="sec" id="projects" style="padding-top:0;border-top:0">
+  <div class="head" style="margin-bottom:20px"><div><span class="label"><span class="ru">Реестр проектов</span><span class="en">Project index</span></span><h2><span class="ru">Что я делаю</span><span class="en">What I make</span></h2></div>
+  <p><span class="ru">У каждого проекта своя страница: что он умеет, на каком он этапе и чего в нём ещё нет.</span><span class="en">Each project has its own page: what it does, where it stands and what it does not do yet.</span></p></div>
+  <div class="ledger">
+    <a class="item p-cozy" href="cozydub.html">
+      <div class="ic" aria-hidden="true"><img src="assets/cozydub-icon.webp" alt="" width="56" height="56" loading="lazy"></div>
+      <h3>CozyDub</h3>
+      <div class="what"><span class="ru">Дубляж и работа с видеоконтентом, совмещённые с уютным уголком. Для Mac и Windows.</span><span class="en">Dubbing and video work combined with a cozy corner. For Mac and Windows.</span><span class="plat">Mac · Windows · <span class="ru">комната и на телефоне</span><span class="en">the lounge on phone too</span></span></div>
+      <span class="chip live"><span class="ru">Главный · v1.97</span><span class="en">Flagship · v1.97</span></span>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+    <a class="item p-tarelka" href="tarelka.html">
+      <div class="ic" aria-hidden="true"><img src="assets/tarelka-icon.webp" alt="" width="56" height="56" loading="lazy"></div>
+      <h3>Tarelka</h3>
+      <div class="what"><span class="ru">Умный дневник питания по фото: калории, рационы и что приготовить.</span><span class="en">A smart food diary from photos: calories, meal plans and what to cook.</span><span class="plat">iPhone · Android · <span class="ru">из браузера, не из магазина</span><span class="en">from the browser, not a store</span></span></div>
+      <span class="chip sale"><span class="ru">Доступен</span><span class="en">Available</span></span>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+    <a class="item p-selfaware" href="selfaware.html">
+      <div class="ic" aria-hidden="true"><img src="assets/selfaware-icon.webp" alt="" width="56" height="56" loading="lazy"></div>
+      <h3>selfaware</h3>
+      <div class="what"><span class="ru">Восстановление, нагрузка и сон по пульсу с браслета. Считается на телефоне.</span><span class="en">Recovery, strain and sleep from a band’s heart rate. Computed on the phone.</span><span class="plat">iPhone · <span class="ru">пока нет в App Store</span><span class="en">not on the App Store yet</span></span></div>
+      <span class="chip wip"><span class="ru">В разработке</span><span class="en">In development</span></span>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="head"><div><span class="label"><span class="ru">Как я работаю</span><span class="en">How I work</span></span><h2><span class="ru">Как появляются <em>продукты</em></span><span class="en">How the products <em>come about</em></span></h2></div>
+  <p><span class="ru">Три принципа, по которым сделаны все проекты на этой странице.</span><span class="en">Three principles behind every project on this page.</span></p></div>
+  <div class="grid">
+    <div class="card"><span class="label"><span class="ru">Принцип 1</span><span class="en">Principle 1</span></span><h3><span class="ru">Начинаю с реальной проблемы</span><span class="en">I start with a real problem</span></h3>
+      <p><span class="ru">Продукт появляется там, где мне самой не хватало решения. Сначала я пользуюсь им сама, потом его проверяют близкие люди, которые говорят правду.</span><span class="en">A product appears where I was missing a solution myself. I use it first, then people close to me test it, and they tell me the truth.</span></p></div>
+    <div class="card"><span class="label"><span class="ru">Принцип 2</span><span class="en">Principle 2</span></span><h3><span class="ru">Проверяю до релиза</span><span class="en">I test before release</span></h3>
+      <p><span class="ru">Тестирую с разных сторон и заранее изучаю слабые места похожих продуктов, чтобы не повторять чужих ошибок. У CozyDub за плечами 242 сборки.</span><span class="en">I test from different angles and study the weak spots of similar products up front, so I do not repeat other people’s mistakes. CozyDub has 242 builds behind it.</span></p></div>
+    <div class="card"><span class="label"><span class="ru">Принцип 3</span><span class="en">Principle 3</span></span><h3><span class="ru">Делаю для людей</span><span class="en">I build for people</span></h3>
+      <p><span class="ru">Понятный интерфейс, широкий функционал, современный вид. И качество, доступное каждому.</span><span class="en">A clear interface, broad functionality, a modern look. And quality that is open to everyone.</span></p></div>
+  </div>
+</section>
+
+<section class="sec" id="about">
+  <div class="about">
+    <div><span class="label"><span class="ru">О студии</span><span class="en">About the studio</span></span>
+      <h2 style="margin-top:12px"><span class="ru">Одна идея даёт <em>следующую</em></span><span class="en">One idea leads to the <em>next</em></span></h2></div>
+    <div>
+      <p><span class="ru">Alder — студия одного разработчика. Из одной идеи получается продукт, а когда он получается, рядом появляются новые идеи и новые продукты. Название от ольхи: она первой растёт на бедной земле и готовит её для других растений.</span><span class="en">Alder is a one-developer studio. One idea becomes a product, and once it works, new ideas and new products appear next to it. The name comes from the alder tree, which is among the first to grow on poor ground and prepares it for other plants.</span></p>
+      <p><span class="ru">Всё проходит через меня: концепция, дизайн, функционал, инженерия и общение с теми, кто пользуется продуктом. Поэтому продукты получаются цельными. Если у вас есть идея, напишите.</span><span class="en">Everything passes through me: concept, design, features, engineering and communication with the people who use the product. That is why the products feel whole. If you have an idea, write to me.</span></p>
+      <span class="label"><span class="ru">Для сотрудничества и проектов</span><span class="en">For collaboration and projects</span></span><br>
+      <a class="mail" data-contact="email" href="#"><span class="ru">почта скоро</span><span class="en">email soon</span></a>
+    </div>
+  </div>
+</section>
+</main>
+<div class="wrap"><footer class="foot">
+<div><a class="brand" href="index.html">Alder</a>
+<p style="margin-top:12px"><span class="ru">Продукты одного разработчика: от интерфейса до сервера.</span><span class="en">Products by one developer, from interface to server.</span></p>
+<p><span class="ru">Продавец: Машкова Ксения Денисовна, самозанятая (Россия), ИНН 780226890309.</span><span class="en">Seller: Ksenia Mashkova, self-employed (Russia), tax ID (INN) 780226890309.</span></p></div>
+<div><span class="label"><span class="ru">Проекты</span><span class="en">Projects</span></span>
+<p><a href="cozydub.html">CozyDub</a></p><p><a href="tarelka.html">Tarelka</a></p><p><a href="selfaware.html">selfaware</a></p></div>
+<div><span class="label"><span class="ru">Связь</span><span class="en">Contact</span></span>
+<p><a data-contact="email" data-show="1" href="#"><span class="ru">Написать на почту</span><span class="en">Email</span></a></p></div>
+</footer></div></div>
+<script>
+(function(){
+  // ====== НАСТРОЙКИ: впиши свои контакты. Пустое значение = место отмечено пунктиром, ссылка не работает ======
+  var CONFIG = {
+    email: 'alderdevstudio@gmail.com',        // почта для сотрудничества, например hello@alder.studio
+    github: '',       // например https://github.com/ник
+    telegram: '',     // ссылка на канал или аккаунт, например https://t.me/ник
+    instagram: ''     // появится позже
+  };
+  var root = document.documentElement;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+  function setLang(l){
+    root.setAttribute('lang', l);
+    document.querySelectorAll('[data-lang-btn]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.langBtn===l)); });
+    ['alt','title','aria-label','placeholder'].forEach(function(a){
+      document.querySelectorAll('[data-'+a+'-en]').forEach(function(el){
+        if(!el.hasAttribute('data-'+a+'-ru')) el.setAttribute('data-'+a+'-ru', el.getAttribute(a)||'');
+        el.setAttribute(a, l==='en' ? el.getAttribute('data-'+a+'-en') : el.getAttribute('data-'+a+'-ru'));
+      });
+    });
+    var t=document.querySelector('title'); if(t){ if(!t.dataset.ru) t.dataset.ru=t.textContent; t.textContent = (l==='en' && t.dataset.en) ? t.dataset.en : t.dataset.ru; }
+    set('alder-lang', l);
+  }
+  var saved = get('alder-lang');
+  var initial = saved || ((navigator.language||'ru').toLowerCase().indexOf('ru')===0 ? 'ru' : 'en');
+  setLang(initial);
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.langBtn); }); });
+
+  function setTheme(t){
+    if(t==='system'){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', t); }
+    document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.themeBtn===t)); });
+    set('alder-theme', t);
+  }
+  var st = get('alder-theme') || 'system';
+  setTheme(st);
+  document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.dataset.themeBtn); }); });
+
+  document.querySelectorAll('[data-contact]').forEach(function(el){
+    var k = el.dataset.contact, v = CONFIG[k];
+    if(!v){ el.classList.add('is-empty'); el.removeAttribute('href'); el.setAttribute('aria-disabled','true'); return; }
+    if(k==='email'){ el.setAttribute('href','mailto:'+v); if(el.classList.contains('mail')||el.dataset.show==='1') el.textContent=v; }
+    else { el.setAttribute('href', v); el.setAttribute('target','_blank'); el.setAttribute('rel','noopener'); }
+  });
+})();
+
+</script></body></html>
