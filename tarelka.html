@@ -205,9 +205,11 @@ details p{margin:12px 0 0;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 .item .plat{display:block;margin-top:8px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;color:var(--pa)}
-.phone.nat img{aspect-ratio:auto;height:auto;object-fit:initial;display:block}
+.phone.nat img{aspect-ratio:auto;height:auto;object-fit:initial}
 .shots3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
 @media (max-width:760px){.shots3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
 
 </style>
 </head><body class="p-tarelka"><div class="wrap"><header class="top">
@@ -231,7 +233,8 @@ details p{margin:12px 0 0;color:var(--muted)}
     <p class="note" style="margin-top:22px"><span class="ru">Первые 3 дня подписки дарятся за подтверждённую почту, карта не нужна. Открывается в браузере и ставится на главный экран телефона, это не приложение из App Store или Google Play. Интерфейс на русском. Оценки ориентировочные, это не медицинское приложение.</span><span class="en">The first 3 days of the subscription are a gift for confirming your email, no card needed. It opens in the browser and installs to your phone’s home screen; it is not an App Store or Google Play app. The interface is in Russian. Estimates are approximate and this is not a medical app.</span></p>
   </div>
   <figure style="margin:0"><div class="phone nat big">
-<img src="assets/tarelka-v16-today.webp" alt="Экран Tarelka: Сегодня (пример)" data-alt-en="Tarelka screen: Today (example)" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-today.webp" alt="Экран Tarelka: Сегодня (пример)" data-alt-en="Tarelka screen: Today (example)" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-today-dark.webp" alt="Экран Tarelka: Сегодня (пример)" data-alt-en="Tarelka screen: Today (example)" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">Сегодня (пример)</span><span class="en">Today (example)</span></figcaption></figure>
 </section>
 
@@ -251,11 +254,14 @@ details p{margin:12px 0 0;color:var(--muted)}
   <p><span class="ru">Только наблюдения, без оценок «хорошо» и «плохо». Факты о себе бесплатно, разговор и открытия недели по подписке.</span><span class="en">Observations only, with no “good” or “bad” verdicts. Facts about yourself are free, the conversation and weekly discoveries are on the subscription.</span></p></div>
   <div class="shots3" style="margin-bottom:36px">
     <figure style="margin:0"><div class="phone nat">
-<img src="assets/tarelka-v16-insights.webp" alt="Экран Tarelka: Инсайты: факты о тебе" data-alt-en="Tarelka screen: Insights: facts about you" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-insights.webp" alt="Экран Tarelka: Инсайты: факты о тебе" data-alt-en="Tarelka screen: Insights: facts about you" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-insights-dark.webp" alt="Экран Tarelka: Инсайты: факты о тебе" data-alt-en="Tarelka screen: Insights: facts about you" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">Инсайты: факты о тебе</span><span class="en">Insights: facts about you</span></figcaption></figure><figure style="margin:0"><div class="phone nat">
-<img src="assets/tarelka-v16-ready.webp" alt="Экран Tarelka: «Запись готова»" data-alt-en="Tarelka screen: “Entry ready”" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-ready.webp" alt="Экран Tarelka: «Запись готова»" data-alt-en="Tarelka screen: “Entry ready”" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-ready-dark.webp" alt="Экран Tarelka: «Запись готова»" data-alt-en="Tarelka screen: “Entry ready”" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">«Запись готова»</span><span class="en">“Entry ready”</span></figcaption></figure><figure style="margin:0"><div class="phone nat">
-<img src="assets/tarelka-v16-summary.webp" alt="Экран Tarelka: Итог дня" data-alt-en="Tarelka screen: Day summary" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-summary.webp" alt="Экран Tarelka: Итог дня" data-alt-en="Tarelka screen: Day summary" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-summary-dark.webp" alt="Экран Tarelka: Итог дня" data-alt-en="Tarelka screen: Day summary" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">Итог дня</span><span class="en">Day summary</span></figcaption></figure>
   </div>
   <div class="grid">
@@ -272,9 +278,11 @@ details p{margin:12px 0 0;color:var(--muted)}
   <div class="two top-al">
     <div class="phones" style="grid-template-columns:repeat(2,minmax(0,1fr))">
       <figure style="margin:0"><div class="phone nat">
-<img src="assets/tarelka-v16-chat.webp" alt="Экран Tarelka: Умный помощник" data-alt-en="Tarelka screen: Smart assistant" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-chat.webp" alt="Экран Tarelka: Умный помощник" data-alt-en="Tarelka screen: Smart assistant" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-chat-dark.webp" alt="Экран Tarelka: Умный помощник" data-alt-en="Tarelka screen: Smart assistant" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">Умный помощник</span><span class="en">Smart assistant</span></figcaption></figure><figure style="margin:0"><div class="phone nat">
-<img src="assets/tarelka-v16-mood.webp" alt="Экран Tarelka: Настроение и еда" data-alt-en="Tarelka screen: Mood and food" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-mood.webp" alt="Экран Tarelka: Настроение и еда" data-alt-en="Tarelka screen: Mood and food" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-mood-dark.webp" alt="Экран Tarelka: Настроение и еда" data-alt-en="Tarelka screen: Mood and food" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">Настроение и еда</span><span class="en">Mood and food</span></figcaption></figure>
     </div>
     <ul class="list">
@@ -303,9 +311,11 @@ details p{margin:12px 0 0;color:var(--muted)}
     </ul>
     <div class="phones" style="grid-template-columns:repeat(2,minmax(0,1fr))">
       <figure style="margin:0"><div class="phone nat">
-<img src="assets/tarelka-v16-menu.webp" alt="Экран Tarelka: Меню на неделю" data-alt-en="Tarelka screen: Weekly menu" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-menu.webp" alt="Экран Tarelka: Меню на неделю" data-alt-en="Tarelka screen: Weekly menu" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-menu-dark.webp" alt="Экран Tarelka: Меню на неделю" data-alt-en="Tarelka screen: Weekly menu" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">Меню на неделю</span><span class="en">Weekly menu</span></figcaption></figure><figure style="margin:0"><div class="phone nat">
-<img src="assets/tarelka-v16-today.webp" alt="Экран Tarelka: Сегодня (пример)" data-alt-en="Tarelka screen: Today (example)" width="520" loading="lazy"></div>
+<img class="theme-light" src="assets/tarelka-v16-today.webp" alt="Экран Tarelka: Сегодня (пример)" data-alt-en="Tarelka screen: Today (example)" width="520" loading="lazy">
+<img class="theme-dark" src="assets/tarelka-v16-today-dark.webp" alt="Экран Tarelka: Сегодня (пример)" data-alt-en="Tarelka screen: Today (example)" width="520" loading="lazy"></div>
 <figcaption class="cap"><span class="ru">Сегодня (пример)</span><span class="en">Today (example)</span></figcaption></figure>
     </div>
   </div>
