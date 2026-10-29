@@ -205,6 +205,25 @@ details p{margin:12px 0 0;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 .item .plat{display:block;margin-top:8px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;color:var(--pa)}
+.phone.nat img{aspect-ratio:auto;height:auto;object-fit:initial}
+.shots3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+@media (max-width:760px){.shots3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+.hero.single>div{max-width:900px}
+.wrap-combo{padding-bottom:clamp(36px,6vw,72px)}
+.combo{display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,3vw,40px);width:100%}
+.combo a{display:block;text-decoration:none;color:inherit;transition:transform .25s}
+.combo .c-main{flex:0 0 56%;width:56%}
+.combo .phone{max-width:none;margin:0;border-width:4px;border-radius:20px}
+.combo .c-tar{flex:0 0 22%;width:22%;aspect-ratio:1/1.5;overflow:hidden}
+.combo .c-sa{flex:0 0 15%;width:15%;aspect-ratio:1/1.3;overflow:hidden;border-width:3px;border-radius:15px}
+.combo .phone img{height:100%;object-fit:cover;object-position:top}
+.combo a:hover{transform:translateY(-3px)}
+@media (max-width:560px){.combo .phone{border-width:3px;border-radius:12px}.combo .c-sa{border-width:2px;border-radius:10px}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .combo .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] .combo .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+@media (prefers-reduced-motion:reduce){.combo a{transition:none}.combo a:hover{transform:none}}
 
 </style>
 </head><body class="p-cozy"><div class="wrap"><header class="top">
@@ -247,7 +266,7 @@ details p{margin:12px 0 0;color:var(--muted)}
 
 <div class="two demo">
   <div class="frame"><div class="bar"><i></i><i></i><i></i><span>CozyDub</span></div>
-<img src="assets/cozydub-studio.webp" alt="Творческая студия CozyDub: загрузка видео и цепочка шагов от транскрипции до сведения со звуком" data-alt-en="CozyDub creative studio: uploading a video and the chain of steps from transcription to sound mixing" width="800" height="500" loading="lazy" style="width:100%;height:auto"></div>
+<img src="assets/cozydub-studio2.webp" alt="Творческая студия CozyDub: меню шагов слева, транскрипция и субтитры" data-alt-en="CozyDub creative studio: the steps menu on the left, transcription and subtitles" width="1568" height="736" loading="lazy" style="width:100%;height:auto"></div>
   <div class="txt"><span class="label">01</span><h3 style="margin-top:10px"><span class="ru">Творческая студия</span><span class="en">Creative studio</span></h3><p><span class="ru">Загружаешь видео или аудио, и всё идёт по цепочке: транскрипция и субтитры, вычитка, дубляж, сведение со звуком. Умная чистка убирает слова-паразиты и фоновый шум.</span><span class="en">Drop in video or audio and it runs as a chain: transcription and subtitles, proofreading, dubbing, sound mixing. Smart cleanup removes filler words and background noise.</span></p></div>
 </div>
 <div class="two flip demo">

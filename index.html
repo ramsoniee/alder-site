@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="claude:viewport-fit-sides" content="cover">
 <title data-en="Alder">Alder</title>
 <meta name="description" content="Alder">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -28,15 +27,15 @@
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}
 
 /* акценты проектов: переопределяют --pa на странице проекта */
-.pg.p-cozy{--pa:#2f857b;--pa-soft:#d9eeea}
-.pg.p-tarelka{--pa:#b6613f;--pa-soft:#f3e2d8}
-.pg.p-selfaware{--pa:#2b6a75;--pa-soft:#d9e8ea}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pg.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
-  :root:not([data-theme="light"]) .pg.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
-  :root:not([data-theme="light"]) .pg.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}}
-:root[data-theme="dark"] .pg.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
-:root[data-theme="dark"] .pg.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
-:root[data-theme="dark"] .pg.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}
+body.p-cozy{--pa:#2f857b;--pa-soft:#d9eeea}
+body.p-tarelka{--pa:#b6613f;--pa-soft:#f3e2d8}
+body.p-selfaware{--pa:#2b6a75;--pa-soft:#d9e8ea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
+  :root:not([data-theme="light"]) body.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
+  :root:not([data-theme="light"]) body.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}}
+:root[data-theme="dark"] body.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
+:root[data-theme="dark"] body.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
+:root[data-theme="dark"] body.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -70,9 +69,9 @@ nav a.nl:hover,nav a.nl[aria-current]{color:var(--ink);background:var(--surface2
 /* кнопки, чипы */
 .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:500;font-size:1rem;padding:13px 22px;border-radius:999px;
   background:var(--pa);color:var(--accent-ink);border:1px solid var(--pa);cursor:pointer}
-.pg.p-cozy .btn,.pg.p-tarelka .btn,.pg.p-selfaware .btn{color:#fff}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pg.p-cozy .btn,:root:not([data-theme="light"]) .pg.p-tarelka .btn,:root:not([data-theme="light"]) .pg.p-selfaware .btn{color:#101010}}
-:root[data-theme="dark"] .pg.p-cozy .btn,:root[data-theme="dark"] .pg.p-tarelka .btn,:root[data-theme="dark"] .pg.p-selfaware .btn{color:#101010}
+body.p-cozy .btn,body.p-tarelka .btn,body.p-selfaware .btn{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-cozy .btn,:root:not([data-theme="light"]) body.p-tarelka .btn,:root:not([data-theme="light"]) body.p-selfaware .btn{color:#101010}}
+:root[data-theme="dark"] body.p-cozy .btn,:root[data-theme="dark"] body.p-tarelka .btn,:root[data-theme="dark"] body.p-selfaware .btn{color:#101010}
 .btn:hover{filter:brightness(1.07)}
 .btn.ghost{background:none;color:var(--ink)!important;border-color:var(--line)}
 .btn.ghost:hover{border-color:var(--ink);filter:none}
@@ -209,8 +208,8 @@ details p{margin:12px 0 0;color:var(--muted)}
 .phone.nat img{aspect-ratio:auto;height:auto;object-fit:initial}
 .shots3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
 @media (max-width:760px){.shots3{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pg.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
-:root[data-theme="dark"] .pg.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
 .hero.single>div{max-width:900px}
 .wrap-combo{padding-bottom:clamp(36px,6vw,72px)}
 .combo{display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,3vw,40px);width:100%}
@@ -227,7 +226,7 @@ details p{margin:12px 0 0;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.combo a{transition:none}.combo a:hover{transform:none}}
 
 </style>
-<div class="pg " id="pg"><div class="wrap"><header class="top">
+</head><body class=""><div class="wrap"><header class="top">
 <a class="brand" href="index.html" aria-label="Alder">Alder <small><span class="ru">разработка</span><span class="en">software</span></small></a>
 <nav aria-label="Основное меню" data-aria-label-en="Main">
 <a class="nl" href="index.html#projects" ><span class="ru">Проекты</span><span class="en">Projects</span></a>
@@ -254,7 +253,7 @@ details p{margin:12px 0 0;color:var(--muted)}
       <img class="theme-light" src="assets/tarelka-v16-today.webp" alt="Tarelka: экран «Сегодня»" data-alt-en="Tarelka: the Today screen" width="520" loading="lazy">
       <img class="theme-dark" src="assets/tarelka-v16-today-dark.webp" alt="Tarelka: экран «Сегодня»" data-alt-en="Tarelka: the Today screen" width="520" loading="lazy"></a>
     <a class="frame hot c-main" href="cozydub.html"><div class="bar"><i></i><i></i><i></i><span>CozyDub</span></div>
-      <img src="assets/cozydub-studio.webp" alt="Творческая студия CozyDub" data-alt-en="The CozyDub creative studio" width="800" height="500" style="width:100%;height:auto;display:block"></a>
+      <img src="assets/cozydub-studio2.webp" alt="Творческая студия CozyDub: транскрипция и субтитры" data-alt-en="The CozyDub creative studio: transcription and subtitles" width="1568" height="736" style="width:100%;height:auto;display:block"></a>
     <a class="phone nat c-sa" href="selfaware.html">
       <img src="assets/selfaware-today.webp" alt="selfaware: экран «Сегодня»" data-alt-en="selfaware: the Today screen" width="470" loading="lazy"></a>
   </div>
@@ -323,8 +322,7 @@ details p{margin:12px 0 0;color:var(--muted)}
 <p><a href="cozydub.html">CozyDub</a></p><p><a href="tarelka.html">Tarelka</a></p><p><a href="selfaware.html">selfaware</a></p></div>
 <div><span class="label"><span class="ru">Связь</span><span class="en">Contact</span></span>
 <p><a data-contact="email" data-show="1" href="#"><span class="ru">Написать на почту</span><span class="en">Email</span></a></p></div>
-</footer></div></div>
-<script>
+</footer></div><script>
 (function(){
   // ====== НАСТРОЙКИ: впиши свои контакты. Пустое значение = место отмечено пунктиром, ссылка не работает ======
   var CONFIG = {
@@ -371,4 +369,4 @@ details p{margin:12px 0 0;color:var(--muted)}
   });
 })();
 
-</script>
+</script></body></html>
