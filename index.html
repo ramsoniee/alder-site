@@ -211,14 +211,17 @@ details p{margin:12px 0 0;color:var(--muted)}
 @media (max-width:760px){.shots3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pg.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
 :root[data-theme="dark"] .pg.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
-.combo{position:relative;width:100%;aspect-ratio:1/.93}
-.combo a{display:block;position:absolute;text-decoration:none;color:inherit}
-.combo .c-main{left:0;top:0;width:88%;z-index:1}
-.combo .phone{max-width:none;margin:0;border-width:4px;border-radius:20px;transition:transform .25s}
-.combo .c-tar{left:40%;top:30%;width:28%;z-index:3}
-.combo .c-sa{right:0;top:49%;width:20%;z-index:2;border-width:3px;border-radius:16px}
-.combo .c-main{transition:transform .25s}
+.hero.single>div{max-width:900px}
+.wrap-combo{padding-bottom:clamp(36px,6vw,72px)}
+.combo{display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,3vw,40px);width:100%}
+.combo a{display:block;text-decoration:none;color:inherit;transition:transform .25s}
+.combo .c-main{flex:0 0 56%;width:56%}
+.combo .phone{max-width:none;margin:0;border-width:4px;border-radius:20px}
+.combo .c-tar{flex:0 0 22%;width:22%;aspect-ratio:1/1.5;overflow:hidden}
+.combo .c-sa{flex:0 0 15%;width:15%;aspect-ratio:1/1.3;overflow:hidden;border-width:3px;border-radius:15px}
+.combo .phone img{height:100%;object-fit:cover;object-position:top}
 .combo a:hover{transform:translateY(-3px)}
+@media (max-width:560px){.combo .phone{border-width:3px;border-radius:12px}.combo .c-sa{border-width:2px;border-radius:10px}}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .combo .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
 :root[data-theme="dark"] .combo .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
 @media (prefers-reduced-motion:reduce){.combo a{transition:none}.combo a:hover{transform:none}}
@@ -234,26 +237,29 @@ details p{margin:12px 0 0;color:var(--muted)}
 </nav></header></div>
 <main class="wrap">
 
-<section class="hero">
+<section class="hero single" style="padding-bottom:clamp(8px,2vw,24px)">
   <div>
     <span class="chip live"><span class="ru">Один разработчик, три продукта</span><span class="en">One developer, three products</span></span>
-    <h1><span class="ru">Делаю программы <em>целиком</em>: от интерфейса до сервера.</span><span class="en">I build software <em>end to end</em>, from interface to server.</span></h1>
+    <h1 style="font-size:clamp(2.1rem,4.8vw,3.7rem)"><span class="ru">Делаю программы <em>целиком</em>: от интерфейса до сервера.</span><span class="en">I build software <em>end to end</em>, from interface to server.</span></h1>
     <p class="lead"><span class="ru">Alder — студия одного разработчика. Есть главный продукт, который постоянно развивается, второй уже в продаже и третий, который пока проверяю на себе.</span><span class="en">Alder is a one-person studio. One flagship product that keeps evolving, a second one already on sale, and a third that I am still testing on myself.</span></p>
     <div class="row">
       <a class="btn" href="cozydub.html"><span class="ru">Смотреть CozyDub</span><span class="en">See CozyDub</span></a>
       <a class="btn ghost" href="#projects"><span class="ru">Все проекты</span><span class="en">All projects</span></a>
     </div>
   </div>
+</section>
+<div class="wrap-combo">
   <div class="combo" aria-label="CozyDub, Tarelka и selfaware" data-aria-label-en="CozyDub, Tarelka and selfaware">
-    <a class="frame hot c-main" href="cozydub.html"><div class="bar"><i></i><i></i><i></i><span>CozyDub</span></div>
-      <img src="assets/cozydub-studio.webp" alt="Творческая студия CozyDub" data-alt-en="The CozyDub creative studio" width="800" height="500" style="width:100%;height:auto;display:block"></a>
     <a class="phone nat c-tar" href="tarelka.html">
       <img class="theme-light" src="assets/tarelka-v16-today.webp" alt="Tarelka: экран «Сегодня»" data-alt-en="Tarelka: the Today screen" width="520" loading="lazy">
       <img class="theme-dark" src="assets/tarelka-v16-today-dark.webp" alt="Tarelka: экран «Сегодня»" data-alt-en="Tarelka: the Today screen" width="520" loading="lazy"></a>
+    <a class="frame hot c-main" href="cozydub.html"><div class="bar"><i></i><i></i><i></i><span>CozyDub</span></div>
+      <img src="assets/cozydub-studio.webp" alt="Творческая студия CozyDub" data-alt-en="The CozyDub creative studio" width="800" height="500" style="width:100%;height:auto;display:block"></a>
     <a class="phone nat c-sa" href="selfaware.html">
       <img src="assets/selfaware-today.webp" alt="selfaware: экран «Сегодня»" data-alt-en="selfaware: the Today screen" width="470" loading="lazy"></a>
   </div>
-</section>
+</div>
+
 
 <section class="sec" id="projects" style="padding-top:0;border-top:0">
   <div class="head" style="margin-bottom:20px"><div><span class="label"><span class="ru">Реестр проектов</span><span class="en">Project index</span></span><h2><span class="ru">Что я делаю</span><span class="en">What I make</span></h2></div>
