@@ -225,6 +225,18 @@ details p{margin:12px 0 0;color:var(--muted)}
 :root[data-theme="dark"] .combo .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
 @media (prefers-reduced-motion:reduce){.combo a{transition:none}.combo a:hover{transform:none}}
 
+body.p-alderapp{--pa:#4a5d3a;--pa-soft:#e3e9d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}}
+:root[data-theme="dark"] body.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}
+body.p-alderapp .btn{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-alderapp .btn{color:#101010}}
+:root[data-theme="dark"] body.p-alderapp .btn{color:#101010}
+.item.p-alderapp{--pa:#4a5d3a;--pa-soft:#e3e9d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}}
+:root[data-theme="dark"] .item.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-alderapp .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] body.p-alderapp .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+
 </style>
 </head><body class=""><div class="wrap"><header class="top">
 <a class="brand" href="index.html" aria-label="Alder">Alder <small><span class="ru">разработка</span><span class="en">software</span></small></a>
@@ -238,9 +250,9 @@ details p{margin:12px 0 0;color:var(--muted)}
 
 <section class="hero single" style="padding-bottom:clamp(8px,2vw,24px)">
   <div>
-    <span class="chip live"><span class="ru">Один разработчик, три продукта</span><span class="en">One developer, three products</span></span>
+    <span class="chip live"><span class="ru">Один разработчик, четыре продукта</span><span class="en">One developer, four products</span></span>
     <h1 style="font-size:clamp(2.1rem,4.8vw,3.7rem)"><span class="ru">Делаю программы <em>целиком</em>: от интерфейса до сервера.</span><span class="en">I build software <em>end to end</em>, from interface to server.</span></h1>
-    <p class="lead"><span class="ru">Alder — студия одного разработчика. Есть главный продукт, который постоянно развивается, второй уже в продаже и третий, который пока проверяю на себе.</span><span class="en">Alder is a one-person studio. One flagship product that keeps evolving, a second one already on sale, and a third that I am still testing on myself.</span></p>
+    <p class="lead"><span class="ru">Alder — студия одного разработчика. Есть главный продукт, который постоянно развивается, второй в бета-версии, личный альбом натуралиста «для души» и прототип, который пока проверяю на себе.</span><span class="en">Alder is a one-person studio. One flagship product that keeps evolving, a second one in beta, a naturalist’s album made for the joy of it, and a prototype I am still testing on myself.</span></p>
     <div class="row">
       <a class="btn" href="cozydub.html"><span class="ru">Смотреть CozyDub</span><span class="en">See CozyDub</span></a>
       <a class="btn ghost" href="#projects"><span class="ru">Все проекты</span><span class="en">All projects</span></a>
@@ -276,6 +288,13 @@ details p{margin:12px 0 0;color:var(--muted)}
       <h3>Tarelka</h3>
       <div class="what"><span class="ru">Дневник питания без цифр и чувства вины: запись по фото, помощник и новые факты о себе.</span><span class="en">A food diary without numbers and guilt: photo logging, an assistant and new facts about yourself.</span><span class="plat">iPhone · Android · <span class="ru">из браузера, не из магазина</span><span class="en">from the browser, not a store</span></span></div>
       <span class="chip sale"><span class="ru">Бета · v1.6</span><span class="en">Beta · v1.6</span></span>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+    <a class="item p-alderapp" href="alder-app.html">
+      <div class="ic" aria-hidden="true"><img src="assets/alder-icon.webp" alt="" width="56" height="56" loading="lazy"></div>
+      <h3>Alder</h3>
+      <div class="what"><span class="ru">Альбом натуралиста в телефоне: находишь растение, даёшь ему имя, и оно попадает в гербарий.</span><span class="en">A naturalist’s album in your phone: find a plant, name it, and it joins your herbarium.</span><span class="plat">iPhone · Android · <span class="ru">из браузера, не из магазина</span><span class="en">from the browser, not a store</span></span></div>
+      <span class="chip sale"><span class="ru">Бета</span><span class="en">Beta</span></span>
       <span class="arr" aria-hidden="true">→</span>
     </a>
     <a class="item p-selfaware" href="selfaware.html">

@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title data-en="Alder, a naturalist’s album · Alder">Alder, альбом натуралиста · Alder</title>
+<meta name="description" content="Alder">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout: тихий каталог мастерской. Широкая сетка, крупный serif-тезис, реестр проектов со статусами вместо витрины карточек. */
+:root{
+  --bg:#f1ede4; --surface:#faf8f3; --surface2:#e8e3d6; --ink:#1d2822; --muted:#666e64; --line:#d8d2c2;
+  --accent:#2f5d46; --accent-ink:#f5f7f2; --pa:#2f5d46; --pa-soft:#dfe8e0;
+  --ok:#2f6a4a; --warn:#9a6a14; --wip:#2f6f7a;
+  --f-display:"Spectral","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --f-body:"Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:14px; --shadow:0 1px 2px rgba(29,40,34,.06),0 8px 24px rgba(29,40,34,.07);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131915; --surface:#1a221d; --surface2:#232d27; --ink:#e8ebe3; --muted:#9aa398; --line:#2d3830;
+  --accent:#8fbf9f; --accent-ink:#0f1a13; --pa:#8fbf9f; --pa-soft:#22302a;
+  --ok:#8fcfa6; --warn:#e0b45a; --wip:#85c4cd;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131915; --surface:#1a221d; --surface2:#232d27; --ink:#e8ebe3; --muted:#9aa398; --line:#2d3830;
+  --accent:#8fbf9f; --accent-ink:#0f1a13; --pa:#8fbf9f; --pa-soft:#22302a;
+  --ok:#8fcfa6; --warn:#e0b45a; --wip:#85c4cd;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+/* акценты проектов: переопределяют --pa на странице проекта */
+body.p-cozy{--pa:#2f857b;--pa-soft:#d9eeea}
+body.p-tarelka{--pa:#b6613f;--pa-soft:#f3e2d8}
+body.p-selfaware{--pa:#2b6a75;--pa-soft:#d9e8ea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
+  :root:not([data-theme="light"]) body.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
+  :root:not([data-theme="light"]) body.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}}
+:root[data-theme="dark"] body.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}
+:root[data-theme="dark"] body.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}
+:root[data-theme="dark"] body.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  -webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pa);outline-offset:3px;border-radius:6px}
+html[lang="en"] .ru{display:none!important} html[lang="ru"] .en{display:none!important}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.08;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,6.4vw,4.6rem)} h2{font-size:clamp(1.8rem,4vw,2.7rem)} h3{font-size:1.35rem;line-height:1.2}
+h1 em,h2 em{font-style:italic;color:var(--pa)}
+p{margin:0 0 1em;max-width:62ch;text-wrap:pretty}
+.mono,.label{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:clamp(1.05rem,2vw,1.28rem);color:var(--muted);max-width:56ch}
+
+/* шапка */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-size:1.7rem;text-decoration:none;letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px}
+.brand small{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+nav a.nl{text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:999px;font-size:.95rem}
+nav a.nl:hover,nav a.nl[aria-current]{color:var(--ink);background:var(--surface2)}
+.tgl{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.tgl button{font:inherit;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;border:0;background:none;color:var(--muted);padding:7px 11px;cursor:pointer}
+.tgl button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tgl.sq button{padding:7px 10px}
+
+/* кнопки, чипы */
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:500;font-size:1rem;padding:13px 22px;border-radius:999px;
+  background:var(--pa);color:var(--accent-ink);border:1px solid var(--pa);cursor:pointer}
+body.p-cozy .btn,body.p-tarelka .btn,body.p-selfaware .btn{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-cozy .btn,:root:not([data-theme="light"]) body.p-tarelka .btn,:root:not([data-theme="light"]) body.p-selfaware .btn{color:#101010}}
+:root[data-theme="dark"] body.p-cozy .btn,:root[data-theme="dark"] body.p-tarelka .btn,:root[data-theme="dark"] body.p-selfaware .btn{color:#101010}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:none;color:var(--ink)!important;border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink);filter:none}
+.btn.is-empty,.is-empty{border-style:dashed;opacity:.65;cursor:default;pointer-events:none}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 11px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.chip.live{color:var(--ok)} .chip.sale{color:var(--warn)} .chip.wip{color:var(--wip)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(28px,6vw,72px) clamp(36px,6vw,72px)}
+.hero>*{min-width:0}
+.hero h1{margin:18px 0 22px}
+.hero .row{margin-top:28px}
+.hero.single{grid-template-columns:1fr}
+
+/* окно-заглушка под ролик */
+.frame{border-radius:var(--r);overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.frame .bar{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface2)}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.frame .bar span{margin-left:8px;font-family:var(--f-mono);font-size:.68rem;color:var(--muted);letter-spacing:.04em}
+.frame .stage{aspect-ratio:16/10;max-width:100%;display:grid;place-items:center;text-align:center;padding:20px;
+  background:radial-gradient(120% 90% at 20% 10%,var(--pa-soft),transparent 60%),radial-gradient(90% 80% at 90% 100%,var(--surface2),transparent 60%),var(--surface)}
+.frame .stage b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.35rem;margin-bottom:6px}
+.frame .stage small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+.frame .stage .play{width:44px;height:44px;border-radius:50%;border:1px solid var(--pa);display:grid;place-items:center;margin:0 auto 12px;color:var(--pa)}
+.frame.hot .stage{aspect-ratio:16/11}
+
+/* секции */
+.sec{padding-block:clamp(40px,7vw,88px);border-top:1px solid var(--line)}
+.sec>.head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;margin-bottom:36px;align-items:end}
+.sec>.head p{margin:0;color:var(--muted)}
+.sec>.head .label{display:block;margin-bottom:12px}
+
+/* реестр проектов */
+.ledger{border-top:1px solid var(--ink)}
+.item{display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,1.5fr) auto 24px;gap:22px;align-items:center;padding:24px 4px;border-bottom:1px solid var(--line);text-decoration:none}
+.item:hover{background:var(--surface)}
+.item:hover .arr{transform:translateX(5px)}
+.item .ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-family:var(--f-display);font-size:1.7rem;color:var(--pa);background:var(--pa-soft);overflow:hidden}
+.item .ic img{width:100%;height:100%;object-fit:cover}
+.item h3{font-size:1.7rem}
+.item .what{color:var(--muted);font-size:.98rem}
+.item .meta{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.05em;color:var(--muted);text-align:right;white-space:nowrap}
+.arr{font-size:1.4rem;transition:transform .2s}
+.item.p-cozy{--pa:#2f857b;--pa-soft:#d9eeea}.item.p-tarelka{--pa:#b6613f;--pa-soft:#f3e2d8}.item.p-selfaware{--pa:#2b6a75;--pa-soft:#d9e8ea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}:root:not([data-theme="light"]) .item.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}:root:not([data-theme="light"]) .item.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}}
+:root[data-theme="dark"] .item.p-cozy{--pa:#8fd3c8;--pa-soft:#1f3733}:root[data-theme="dark"] .item.p-tarelka{--pa:#e08a66;--pa-soft:#3a2a22}:root[data-theme="dark"] .item.p-selfaware{--pa:#86c6cf;--pa-soft:#1f3236}
+
+/* карточки, списки */
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.card h3{margin-bottom:10px}
+.card p{margin:0;color:var(--muted);font-size:.98rem}
+.card .label{display:block;margin-bottom:14px;color:var(--pa)}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.list li{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:24px 1fr;gap:10px}
+.list li:first-child{border-top:1px solid var(--line)}
+.list li::before{content:"";width:9px;height:9px;border-radius:50%;margin-top:.55em;background:var(--ok)}
+.list.todo li::before{background:none;border:1.5px solid var(--wip)}
+.list b{font-weight:600}
+.list span.d{display:block;color:var(--muted);font-size:.95rem}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.two.top-al{align-items:start}
+.two.flip>:first-child{order:2}
+.two .txt h3{font-size:clamp(1.6rem,3vw,2.1rem);margin-bottom:14px}
+.two .txt p{color:var(--muted)}
+.demo{padding-block:28px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border-top:1px solid var(--ink)}
+.nums div{padding:22px 18px 22px 0;border-bottom:1px solid var(--line)}
+.nums b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1;color:var(--pa);font-variant-numeric:tabular-nums}
+.nums div>span{font-size:.9rem;color:var(--muted);display:block;margin-top:8px}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 26px;padding:0;list-style:none}
+.flow li{font-family:var(--f-mono);font-size:.78rem;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.flow li+li::before{content:"→";margin-right:10px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tags li{font-family:var(--f-mono);font-size:.76rem;padding:6px 12px;border-radius:8px;background:var(--surface2);color:var(--ink)}
+
+/* телефоны Tarelka */
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;align-items:start}
+.phone{border-radius:26px;border:6px solid var(--ink);background:var(--ink);overflow:hidden;box-shadow:var(--shadow);max-width:230px;width:100%;margin-inline:auto}
+.phone img{width:100%;aspect-ratio:390/844;object-fit:cover}
+.phone.big{max-width:270px}
+.cap{font-family:var(--f-mono);font-size:.7rem;color:var(--muted);text-align:center;margin-top:10px;letter-spacing:.04em}
+.theme-light{display:block}.theme-dark{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-light{display:none}:root:not([data-theme="light"]) .theme-dark{display:block}}
+:root[data-theme="dark"] .theme-light{display:none}:root[data-theme="dark"] .theme-dark{display:block}
+.price{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.price .card.best{border-color:var(--pa);box-shadow:inset 0 0 0 1px var(--pa)}
+.price b{font-family:var(--f-display);font-weight:400;font-size:2.2rem;display:block;line-height:1.1}
+.note{font-size:.9rem;color:var(--muted);border-left:2px solid var(--pa);padding:4px 0 4px 16px;margin:0 0 1em;max-width:70ch}
+details{border-bottom:1px solid var(--line);padding:16px 0}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+details[open] summary::after{content:"–"}
+details p{margin:12px 0 0;color:var(--muted)}
+
+/* подвал */
+.foot{border-top:1px solid var(--ink);padding-block:36px 48px;margin-top:20px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:32px}
+.foot>*{min-width:0}
+.foot p{font-size:.9rem;color:var(--muted);margin:0 0 .6em}
+.foot a{text-decoration:none;border-bottom:1px solid var(--line)}
+.foot a:hover{border-color:var(--ink)}
+.foot .label{display:block;margin-bottom:12px}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px)}
+.mail{display:inline-block;font-family:var(--f-display);font-size:clamp(1.4rem,3.2vw,2rem);border-bottom:1px solid var(--ink);text-decoration:none;margin-top:6px;word-break:break-all}
+.mail.is-empty{opacity:.55;border-bottom-style:dashed}
+.back{display:inline-block;margin-top:18px;font-size:.92rem;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--ink)}
+
+@media (max-width:880px){
+  .hero,.two,.about,.sec>.head,.foot{grid-template-columns:minmax(0,1fr)}
+  .two.flip>:first-child{order:0}
+  .item{grid-template-columns:56px minmax(0,1fr) auto;gap:6px 16px}
+  .item .what{grid-column:2/4;grid-row:2}
+  .item .meta{display:none}
+  .item .ic{grid-row:1/3;align-self:start}
+  .arr{display:none}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .item{grid-template-columns:48px minmax(0,1fr)}
+  .item .chip{grid-column:2;justify-self:start}
+  .item .what{grid-column:2}
+  .item .ic{width:48px;height:48px}
+  .top{gap:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.item .plat{display:block;margin-top:8px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;color:var(--pa)}
+.phone.nat img{aspect-ratio:auto;height:auto;object-fit:initial}
+.shots3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+@media (max-width:760px){.shots3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] body.p-tarelka .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+.hero.single>div{max-width:900px}
+.wrap-combo{padding-bottom:clamp(36px,6vw,72px)}
+.combo{display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,3vw,40px);width:100%}
+.combo a{display:block;text-decoration:none;color:inherit;transition:transform .25s}
+.combo .c-main{flex:0 0 56%;width:56%}
+.combo .phone{max-width:none;margin:0;border-width:4px;border-radius:20px}
+.combo .c-tar{flex:0 0 22%;width:22%;aspect-ratio:1/1.5;overflow:hidden}
+.combo .c-sa{flex:0 0 15%;width:15%;aspect-ratio:1/1.3;overflow:hidden;border-width:3px;border-radius:15px}
+.combo .phone img{height:100%;object-fit:cover;object-position:top}
+.combo a:hover{transform:translateY(-3px)}
+@media (max-width:560px){.combo .phone{border-width:3px;border-radius:12px}.combo .c-sa{border-width:2px;border-radius:10px}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .combo .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] .combo .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+@media (prefers-reduced-motion:reduce){.combo a{transition:none}.combo a:hover{transform:none}}
+
+body.p-alderapp{--pa:#4a5d3a;--pa-soft:#e3e9d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}}
+:root[data-theme="dark"] body.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}
+body.p-alderapp .btn{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-alderapp .btn{color:#101010}}
+:root[data-theme="dark"] body.p-alderapp .btn{color:#101010}
+.item.p-alderapp{--pa:#4a5d3a;--pa-soft:#e3e9d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}}
+:root[data-theme="dark"] .item.p-alderapp{--pa:#a9c08f;--pa-soft:#27301f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-alderapp .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
+:root[data-theme="dark"] body.p-alderapp .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+
+</style>
+</head><body class="p-alderapp"><div class="wrap"><header class="top">
+<a class="brand" href="index.html" aria-label="Alder">Alder <small><span class="ru">разработка</span><span class="en">software</span></small></a>
+<nav aria-label="Основное меню" data-aria-label-en="Main">
+<a class="nl" href="index.html#projects" aria-current="page"><span class="ru">Проекты</span><span class="en">Projects</span></a>
+<a class="nl" href="index.html#about" ><span class="ru">Обо мне</span><span class="en">About</span></a>
+<span class="tgl" role="group" aria-label="Язык" data-aria-label-en="Language"><button type="button" data-lang-btn="ru" aria-pressed="true">RU</button><button type="button" data-lang-btn="en" aria-pressed="false">EN</button></span>
+<span class="tgl sq" role="group" aria-label="Тема" data-aria-label-en="Theme"><button type="button" data-theme-btn="system" aria-pressed="true" title="Как в системе" data-title-en="System">◐</button><button type="button" data-theme-btn="light" aria-pressed="false" title="Светлая" data-title-en="Light">☀</button><button type="button" data-theme-btn="dark" aria-pressed="false" title="Тёмная" data-title-en="Dark">☾</button></span>
+</nav></header></div>
+<main class="wrap">
+<section class="hero">
+  <div>
+    <img src="assets/alder-icon.webp" alt="Иконка приложения Alder: росток с двумя листьями" data-alt-en="Alder app icon: a sprout with two leaves" width="88" height="88" style="border-radius:22px;margin-bottom:16px"><span class="chip sale" style="display:flex;width:fit-content"><span class="ru">Бета · рабочая версия, делается для души</span><span class="en">Beta · working version, a passion project</span></span>
+    <h1><span class="ru">Альбом натуралиста <em>в телефоне</em></span><span class="en">A naturalist’s album <em>in your phone</em></span></h1>
+    <p class="lead"><span class="ru">Находишь растение, фотографируешь, даёшь ему своё имя, и оно попадает в личный гербарий. Alder подсказывает, что растёт рядом и где это искать. А карточка растения открывается только находкой: это игра в коллекционирование, а не справочник.</span><span class="en">You find a plant, photograph it, give it a name of your own, and it joins your personal herbarium. Alder tells you what grows nearby and where to look. A plant’s card opens only with a find: it is a collecting game, not a reference book.</span></p>
+    <div class="row">
+      <a class="btn" href="https://ramsoniee.github.io/alder/" target="_blank" rel="noopener"><span class="ru">Открыть Alder</span><span class="en">Open Alder</span> ↗</a>
+      <a class="btn ghost" href="#status"><span class="ru">Что уже работает</span><span class="en">What works already</span></a>
+    </div>
+    <p class="note" style="margin-top:22px"><span class="ru">Открывается в браузере и ставится на главный экран телефона как приложение («На экран Домой» в Safari, «Установить» в Chrome), в App Store и Google Play его нет. Интерфейс на русском. Приложение названо так же, как студия, и сделано «для души».</span><span class="en">Opens in the browser and installs to your phone’s home screen as an app (“Add to Home Screen” in Safari, “Install” in Chrome); it is not on the App Store or Google Play. The interface is in Russian. The app shares its name with the studio and is made for the joy of it.</span></p>
+  </div>
+  <figure style="margin:0"><div class="phone nat big">
+<img class="theme-light" src="assets/alder-app-catalog.webp" alt="Экран приложения Alder: Каталог растений" data-alt-en="Alder app screen: Plant catalogue" width="520" height="1126" loading="lazy">
+<img class="theme-dark" src="assets/alder-app-catalog-dark.webp" alt="Экран приложения Alder: Каталог растений" data-alt-en="Alder app screen: Plant catalogue" width="520" height="1126" loading="lazy"></div>
+<figcaption class="cap"><span class="ru">Каталог растений</span><span class="en">Plant catalogue</span></figcaption></figure>
+</section>
+
+<section class="sec">
+  <div class="head"><div><span class="label"><span class="ru">Для кого и зачем</span><span class="en">Who it is for</span></span><h2><span class="ru">Замечать растения, <em>не зубря ботанику</em></span><span class="en">Noticing plants <em>without cramming botany</em></span></h2></div>
+  <p><span class="ru">Для тех, кто любит гулять и замечать растения, но не хочет изучать их по учебнику.</span><span class="en">For people who like walking and noticing plants but do not want to study them from a textbook.</span></p></div>
+  <div class="grid">
+    <div class="card"><h3><span class="ru">Игра в коллекцию</span><span class="en">A collecting game</span></h3><p><span class="ru">Растения собираются как редкие карточки: описание, происхождение названия и «значения» открываются находкой.</span><span class="en">Plants are collected like rare cards: the description, the origin of the name and the “meanings” unlock with a find.</span></p></div>
+    <div class="card"><h3><span class="ru">Личный гербарий</span><span class="en">Your own herbarium</span></h3><p><span class="ru">Фото находки, своё имя растению, заметка, дата и место. Фильтры по сезону и группе: деревья, кустарники, травы, цветы.</span><span class="en">A photo of the find, your own name for the plant, a note, the date and place. Filters by season and group: trees, shrubs, herbs, flowers.</span></p></div>
+    <div class="card"><h3><span class="ru">Немного поэзии</span><span class="en">A little poetry</span></h3><p><span class="ru">Фольклор, история названий и астроботаника добавляют вкус. Всё это помечено как предание, а не наука.</span><span class="en">Folklore, the history of names and astro-botany add flavour. All of it is marked as lore, not science.</span></p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="head"><div><span class="label"><span class="ru">Что умеет</span><span class="en">What it does</span></span><h2><span class="ru">Возможности <em>сейчас</em></span><span class="en">Features <em>right now</em></span></h2></div><p></p></div>
+  <div class="two top-al">
+    <div><ul class="list">
+      <li><div><b><span class="ru">Каталог по странам</span><span class="en">Catalogue by country</span></b><span class="d"><span class="ru">Россия: 39 видов, включая региональные виды северо-запада, юга, Сибири и Дальнего Востока. ОАЭ: 12 видов. У каждого растения нарисованная иллюстрация в едином стиле «гравюры».</span><span class="en">Russia: 39 species, including regional ones from the north-west, south, Siberia and the Far East. UAE: 12 species. Each plant has a drawn illustration in one engraving-like style.</span></span></div></li>
+      <li><div><b><span class="ru">Альбом</span><span class="en">Album</span></b><span class="d"><span class="ru">Фото находки, личное имя, заметка, дата, место. Экспорт и импорт альбома одним файлом.</span><span class="en">Photo, personal name, note, date, place. Export and import of the whole album as one file.</span></span></div></li>
+      <li><div><b><span class="ru">Рядом</span><span class="en">Nearby</span></b><span class="d"><span class="ru">По геопозиции или выбранному городу показывает, какие растения каталога замечали рядом (по открытым данным GBIF и iNaturalist). Ненайденные видны закрытыми силуэтами.</span><span class="en">By geolocation or a chosen city, it shows which catalogue plants were spotted nearby (from open GBIF and iNaturalist data). Plants not yet found appear as closed silhouettes.</span></span></div></li>
+      <li><div><b><span class="ru">Где искать</span><span class="en">Where to look</span></b><span class="d"><span class="ru">Для каждого растения места поблизости, где его чаще всего наблюдали, и месяцы пика. Из карточки можно открыть место в Google Maps и построить маршрут. В ОАЭ названия мест даются на арабском и английском.</span><span class="en">For each plant: nearby places where it is most often seen and its peak months. From the card you can open the place in Google Maps and plan a route. In the UAE, place names appear in Arabic and English.</span></span></div></li>
+    </ul></div>
+    <div><ul class="list">
+      <li><div><b><span class="ru">Подсказка «Рядом с вами»</span><span class="en">“Near you” hint</span></b><span class="d"><span class="ru">При открытии приложение может предложить растение, которого у тебя ещё нет, и расстояние до ближайшего места, где его видели.</span><span class="en">On opening, the app may suggest a plant you do not have yet and the distance to the nearest place where it was seen.</span></span></div></li>
+      <li><div><b><span class="ru">Закрытые карточки</span><span class="en">Closed cards</span></b><span class="d"><span class="ru">Находка подтверждается фото плюс либо тем, что ты в пределах 300 м от известного места наблюдения вида, либо определением по фото через Pl@ntNet (нужен бесплатный ключ, он хранится только на устройстве). Предупреждения о безопасности видны всегда.</span><span class="en">A find is confirmed by a photo plus either being within 300 m of a known sighting of the species or photo identification via Pl@ntNet (needs a free key, stored only on the device). Safety warnings are always visible.</span></span></div></li>
+      <li><div><b><span class="ru">Слой «значений»</span><span class="en">The “meanings” layer</span></b><span class="d"><span class="ru">Фольклор, история, астроботаника (по Калпеперу, 1653), кельтский календарь деревьев (конструкция Р. Грейвса, 1948), цветок месяца, растения по имени. Везде указан источник и пометка «предание, не наука».</span><span class="en">Folklore, history, astro-botany (after Culpeper, 1653), the Celtic tree calendar (R. Graves’s 1948 construction), flower of the month, plants by name. The source and a “lore, not science” note are always given.</span></span></div></li>
+      <li><div><b><span class="ru">Работает офлайн</span><span class="en">Works offline</span></b><span class="d"><span class="ru">Устанавливается как PWA, данные хранятся на устройстве. Светлая и тёмная темы; на широком экране две панели: список слева, карточка справа.</span><span class="en">Installs as a PWA, data stays on the device. Light and dark themes; on a wide screen there are two panes: list on the left, card on the right.</span></span></div></li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="head"><div><span class="label"><span class="ru">Экраны</span><span class="en">Screens</span></span><h2><span class="ru">Как это <em>выглядит</em></span><span class="en">What it <em>looks like</em></span></h2></div>
+  <p><span class="ru">Бумажная гербарная основа, светлая «вкладка книги» для преданий, шрифты лежат в самом приложении и работают без сети.</span><span class="en">A paper herbarium base, a light “book tab” for the lore; the fonts ship with the app and work offline.</span></p></div>
+  <div class="phones"><figure style="margin:0"><div class="phone nat">
+<img class="theme-light" src="assets/alder-app-catalog.webp" alt="Экран приложения Alder: Каталог" data-alt-en="Alder app screen: Catalogue" width="520" height="1126" loading="lazy">
+<img class="theme-dark" src="assets/alder-app-catalog-dark.webp" alt="Экран приложения Alder: Каталог" data-alt-en="Alder app screen: Catalogue" width="520" height="1126" loading="lazy"></div>
+<figcaption class="cap"><span class="ru">Каталог</span><span class="en">Catalogue</span></figcaption></figure><figure style="margin:0"><div class="phone nat">
+<img class="theme-light" src="assets/alder-app-card.webp" alt="Экран приложения Alder: Карточка растения" data-alt-en="Alder app screen: Plant card" width="520" height="1126" loading="lazy">
+<img class="theme-dark" src="assets/alder-app-card-dark.webp" alt="Экран приложения Alder: Карточка растения" data-alt-en="Alder app screen: Plant card" width="520" height="1126" loading="lazy"></div>
+<figcaption class="cap"><span class="ru">Карточка растения</span><span class="en">Plant card</span></figcaption></figure><figure style="margin:0"><div class="phone nat">
+<img class="theme-light" src="assets/alder-app-near.webp" alt="Экран приложения Alder: Рядом: закрытые карточки" data-alt-en="Alder app screen: Nearby: closed cards" width="520" height="1126" loading="lazy">
+<img class="theme-dark" src="assets/alder-app-near-dark.webp" alt="Экран приложения Alder: Рядом: закрытые карточки" data-alt-en="Alder app screen: Nearby: closed cards" width="520" height="1126" loading="lazy"></div>
+<figcaption class="cap"><span class="ru">Рядом: закрытые карточки</span><span class="en">Nearby: closed cards</span></figcaption></figure><figure style="margin:0"><div class="phone nat">
+<img class="theme-light" src="assets/alder-app-find.webp" alt="Экран приложения Alder: Новая находка" data-alt-en="Alder app screen: New find" width="520" height="1126" loading="lazy">
+<img class="theme-dark" src="assets/alder-app-find-dark.webp" alt="Экран приложения Alder: Новая находка" data-alt-en="Alder app screen: New find" width="520" height="1126" loading="lazy"></div>
+<figcaption class="cap"><span class="ru">Новая находка</span><span class="en">New find</span></figcaption></figure></div>
+  <p class="note" style="margin-top:18px"><span class="ru">Экраны сняты в живой версии приложения, альбом на них пока пуст.</span><span class="en">The screens come from the live app; the album in them is still empty.</span></p>
+</section>
+
+<section class="sec" id="status">
+  <div class="head"><div><span class="label"><span class="ru">Честный статус</span><span class="en">Honest status</span></span><h2><span class="ru">Что готово, а что <em>ещё нет</em></span><span class="en">What is ready and what <em>is not yet</em></span></h2></div>
+  <p><span class="ru">Это личный проект «для души», и я предпочитаю прямо говорить, что в нём пока сыро.</span><span class="en">This is a personal passion project, and I would rather say plainly what is still rough.</span></p></div>
+  <div class="two top-al">
+    <div><h3 style="margin-bottom:14px"><span class="ru">Уже работает</span><span class="en">Works already</span></h3>
+    <ul class="list">
+      <li><div><b><span class="ru">Рабочая версия</span><span class="en">A working version</span></b><span class="d"><span class="ru">Каталог, альбом, «Рядом», «Где искать», слой значений и офлайн-режим.</span><span class="en">Catalogue, album, Nearby, Where to look, the meanings layer and offline mode.</span></span></div></li>
+      <li><div><b><span class="ru">Честные данные</span><span class="en">Honest data</span></b><span class="d"><span class="ru">Где искать растение, определяется по реальным наблюдениям, а не выдумывается ИИ. Если данных мало, приложение пишет об этом.</span><span class="en">Where to find a plant comes from real sightings, not invented by AI. When data is scarce, the app says so.</span></span></div></li>
+    </ul></div>
+    <div><h3 style="margin-bottom:14px"><span class="ru">Ещё в работе</span><span class="en">Still in progress</span></h3>
+    <ul class="list todo">
+      <li><div><b><span class="ru">Сверка текстов</span><span class="en">Fact-checking the texts</span></b><span class="d"><span class="ru">Тексты карточек написаны по памяти и ждут сверки с источниками, особенно даты и имена в преданиях.</span><span class="en">Card texts were written from memory and still need checking against sources, especially dates and names in the lore.</span></span></div></li>
+      <li><div><b><span class="ru">Иллюстрации</span><span class="en">Illustrations</span></b><span class="d"><span class="ru">Это первый схематичный проход, их можно заменять по одной.</span><span class="en">This is a first schematic pass; they can be replaced one by one.</span></span></div></li>
+      <li><div><b><span class="ru">Определение по фото</span><span class="en">Photo identification</span></b><span class="d"><span class="ru">Через Pl@ntNet, но на реальном ключе ещё не проверено.</span><span class="en">Via Pl@ntNet, but not yet tested with a real key.</span></span></div></li>
+      <li><div><b><span class="ru">ОАЭ</span><span class="en">The UAE</span></b><span class="d"><span class="ru">Открытых наблюдений там мало, поэтому подтверждение «рядом» срабатывает редко.</span><span class="en">There are few open sightings there, so the “nearby” confirmation rarely triggers.</span></span></div></li>
+      <li><div><b><span class="ru">Иконка для iPhone</span><span class="en">iPhone icon</span></b><span class="d"><span class="ru">Нужна PNG-иконка, сейчас только SVG.</span><span class="en">A PNG icon is needed; for now there is only an SVG.</span></span></div></li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="head"><div><span class="label"><span class="ru">Принципы</span><span class="en">Principles</span></span><h2><span class="ru">На чём <em>стоит</em> приложение</span><span class="en">What it <em>stands</em> on</span></h2></div><p></p></div>
+  <div class="grid">
+    <div class="card"><h3><span class="ru">Безопасность</span><span class="en">Safety</span></h3><p><span class="ru">Alder не даёт лечебных советов и не рекомендует есть растения. Ядовитые виды помечены, предупреждение нельзя свернуть. Раздел «В быту» содержит только то, в чём есть уверенность.</span><span class="en">Alder gives no medical advice and does not recommend eating plants. Poisonous species are marked and the warning cannot be collapsed. The “Everyday use” section holds only what is certain.</span></p></div>
+    <div class="card"><h3><span class="ru">Приватность</span><span class="en">Privacy</span></h3><p><span class="ru">Место и альбом хранятся только на устройстве. В открытые базы наблюдений уходят координаты, округлённые примерно до километра.</span><span class="en">Your location and album stay on the device. Only coordinates rounded to about a kilometre go to the open sighting databases.</span></p></div>
+    <div class="card"><h3><span class="ru">Охрана природы</span><span class="en">Caring for nature</span></h3><p><span class="ru">Приложение просит фотографировать, а не срывать.</span><span class="en">The app asks you to photograph, not pick.</span></p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="head"><div><span class="label"><span class="ru">Как устроено</span><span class="en">How it is built</span></span><h2><span class="ru">Под <em>капотом</em></span><span class="en">Under the <em>hood</em></span></h2></div><p></p></div>
+  <p class="note" style="max-width:720px"><span class="ru">Веб-приложение без сборки (HTML, CSS и JavaScript-модули), PWA с офлайн-кэшем, хранение в IndexedDB. Данные: GBIF (наблюдения), OpenStreetMap Nominatim (названия мест), Pl@ntNet (определение по фото). Весит около 350 КБ вместе со шрифтами.</span><span class="en">A build-free web app (HTML, CSS and JavaScript modules), a PWA with an offline cache, storage in IndexedDB. Data: GBIF (sightings), OpenStreetMap Nominatim (place names), Pl@ntNet (photo identification). About 350 KB including the fonts.</span></p>
+  <ul class="tags" style="margin-top:14px"><li>JavaScript</li><li>PWA</li><li>IndexedDB</li><li>GBIF</li><li>Pl@ntNet</li><li>OpenStreetMap</li></ul>
+</section>
+
+<section class="sec">
+  <div class="head"><div><span class="label"><span class="ru">Планы</span><span class="en">Plans</span></span><h2><span class="ru">Что <em>дальше</em></span><span class="en">What <em>next</em></span></h2></div><p><span class="ru">Планы, а не обещания: порядок и сроки могут меняться.</span><span class="en">Plans, not promises: order and timing may change.</span></p></div>
+  <div class="grid">
+    <div class="card"><h3><span class="ru">Тест для входа</span><span class="en">An entry quiz</span></h3><p><span class="ru">«Какое растение тебе подходит» или «растение удачи» как первый шаг для новых пользователей.</span><span class="en">“Which plant suits you” or “plant of luck” as a first step for new users.</span></p></div>
+    <div class="card"><h3><span class="ru">Карта находок</span><span class="en">A map of finds</span></h3><p><span class="ru">Большая карта всех твоих находок.</span><span class="en">A large map of all your finds.</span></p></div>
+    <div class="card"><h3><span class="ru">Уход и климат</span><span class="en">Care and climate</span></h3><p><span class="ru">Уход за растениями и условия, в которых они растут.</span><span class="en">Plant care and the conditions they grow in.</span></p></div>
+    <div class="card"><h3><span class="ru">Чат с растением</span><span class="en">Chat with a plant</span></h3><p><span class="ru">Разговор на основе проверенной карточки.</span><span class="en">A conversation built on a verified card.</span></p></div>
+    <div class="card"><h3><span class="ru">Больше видов</span><span class="en">More species</span></h3><p><span class="ru">Расширение каталога до 60–100 видов на регион.</span><span class="en">Growing the catalogue to 60–100 species per region.</span></p></div>
+    <div class="card"><h3><span class="ru">Английский язык, свой домен, подписка</span><span class="en">English, own domain, subscription</span></h3><p><span class="ru">Английская версия, публикация на отдельном домене и подписка.</span><span class="en">An English version, its own domain and a subscription.</span></p></div>
+  </div>
+  <a class="back" href="index.html">← <span class="ru">Все проекты</span><span class="en">All projects</span></a>
+</section>
+</main>
+<div class="wrap"><footer class="foot">
+<div><a class="brand" href="index.html">Alder</a>
+<p style="margin-top:12px"><span class="ru">Продукты одного разработчика: от интерфейса до сервера.</span><span class="en">Products by one developer, from interface to server.</span></p>
+<p><span class="ru">Продавец: Машкова Ксения Денисовна, самозанятая (Россия), ИНН 780226890309.</span><span class="en">Seller: Ksenia Mashkova, self-employed (Russia), tax ID (INN) 780226890309.</span></p></div>
+<div><span class="label"><span class="ru">Проекты</span><span class="en">Projects</span></span>
+<p><a href="cozydub.html">CozyDub</a></p><p><a href="tarelka.html">Tarelka</a></p><p><a href="selfaware.html">selfaware</a></p></div>
+<div><span class="label"><span class="ru">Связь</span><span class="en">Contact</span></span>
+<p><a data-contact="email" data-show="1" href="#"><span class="ru">Написать на почту</span><span class="en">Email</span></a></p></div>
+</footer></div><script>
+(function(){
+  // ====== НАСТРОЙКИ: впиши свои контакты. Пустое значение = место отмечено пунктиром, ссылка не работает ======
+  var CONFIG = {
+    email: 'alderdevstudio@gmail.com',        // почта для сотрудничества, например hello@alder.studio
+    github: '',       // например https://github.com/ник
+    telegram: '',     // ссылка на канал или аккаунт, например https://t.me/ник
+    instagram: ''     // появится позже
+  };
+  var root = document.documentElement;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+  function setLang(l){
+    root.setAttribute('lang', l);
+    document.querySelectorAll('[data-lang-btn]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.langBtn===l)); });
+    ['alt','title','aria-label','placeholder'].forEach(function(a){
+      document.querySelectorAll('[data-'+a+'-en]').forEach(function(el){
+        if(!el.hasAttribute('data-'+a+'-ru')) el.setAttribute('data-'+a+'-ru', el.getAttribute(a)||'');
+        el.setAttribute(a, l==='en' ? el.getAttribute('data-'+a+'-en') : el.getAttribute('data-'+a+'-ru'));
+      });
+    });
+    var t=document.querySelector('title'); if(t){ if(!t.dataset.ru) t.dataset.ru=t.textContent; t.textContent = (l==='en' && t.dataset.en) ? t.dataset.en : t.dataset.ru; }
+    set('alder-lang', l);
+  }
+  var saved = get('alder-lang');
+  var initial = saved || ((navigator.language||'ru').toLowerCase().indexOf('ru')===0 ? 'ru' : 'en');
+  setLang(initial);
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.langBtn); }); });
+
+  function setTheme(t){
+    if(t==='system'){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', t); }
+    document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.themeBtn===t)); });
+    set('alder-theme', t);
+  }
+  var st = get('alder-theme') || 'system';
+  setTheme(st);
+  document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.dataset.themeBtn); }); });
+
+  document.querySelectorAll('[data-contact]').forEach(function(el){
+    var k = el.dataset.contact, v = CONFIG[k];
+    if(!v){ el.classList.add('is-empty'); el.removeAttribute('href'); el.setAttribute('aria-disabled','true'); return; }
+    if(k==='email'){ el.setAttribute('href','mailto:'+v); if(el.classList.contains('mail')||el.dataset.show==='1') el.textContent=v; }
+    else { el.setAttribute('href', v); el.setAttribute('target','_blank'); el.setAttribute('rel','noopener'); }
+  });
+})();
+
+</script></body></html>
