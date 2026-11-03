@@ -237,6 +237,19 @@ body.p-alderapp .btn{color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-alderapp .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}}
 :root[data-theme="dark"] body.p-alderapp .phone{border-color:#0b0f0c;background:#0b0f0c;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
 
+body.p-constella{--pa:#8a6a1f;--pa-soft:#f1e6c8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-constella{--pa:#e6c77a;--pa-soft:#2e2819}}
+:root[data-theme="dark"] body.p-constella{--pa:#e6c77a;--pa-soft:#2e2819}
+body.p-constella .btn{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.p-constella .btn{color:#101010}}
+:root[data-theme="dark"] body.p-constella .btn{color:#101010}
+.item.p-constella{--pa:#8a6a1f;--pa-soft:#f1e6c8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .item.p-constella{--pa:#e6c77a;--pa-soft:#2e2819}}
+:root[data-theme="dark"] .item.p-constella{--pa:#e6c77a;--pa-soft:#2e2819}
+body.p-constella .phone{border-color:#0b0f0c;background:#0E1424;box-shadow:0 0 0 1px #3a443d,var(--shadow)}
+body.p-constella .phone span{display:block}
+html[lang="en"] body.p-constella .phone span.ru,html[lang="ru"] body.p-constella .phone span.en{display:none}
+
 </style>
 </head><body class=""><div class="wrap"><header class="top">
 <a class="brand" href="index.html" aria-label="Alder">Alder <small><span class="ru">разработка</span><span class="en">software</span></small></a>
@@ -250,7 +263,7 @@ body.p-alderapp .btn{color:#fff}
 
 <section class="hero single" style="padding-bottom:clamp(8px,2vw,24px)">
   <div>
-    <span class="chip live"><span class="ru">Один разработчик, четыре продукта</span><span class="en">One developer, four products</span></span>
+    <span class="chip live"><span class="ru">Один разработчик, четыре продукта и фан-проект</span><span class="en">One developer, four products and a fan project</span></span>
     <h1 style="font-size:clamp(2.1rem,4.8vw,3.7rem)"><span class="ru">Делаю программы <em>целиком</em>: от интерфейса до сервера.</span><span class="en">I build software <em>end to end</em>, from interface to server.</span></h1>
     <p class="lead"><span class="ru">Alder — студия одного разработчика. Есть главный продукт, который постоянно развивается, второй в бета-версии, личный альбом натуралиста «для души» и прототип, который пока проверяю на себе.</span><span class="en">Alder is a one-person studio. One flagship product that keeps evolving, a second one in beta, a naturalist’s album made for the joy of it, and a prototype I am still testing on myself.</span></p>
     <div class="row">
@@ -295,6 +308,13 @@ body.p-alderapp .btn{color:#fff}
       <h3>Alder</h3>
       <div class="what"><span class="ru">Альбом натуралиста в телефоне: находишь растение, даёшь ему имя, и оно попадает в гербарий.</span><span class="en">A naturalist’s album in your phone: find a plant, name it, and it joins your herbarium.</span><span class="plat">iPhone · Android · <span class="ru">из браузера, не из магазина</span><span class="en">from the browser, not a store</span></span></div>
       <span class="chip sale"><span class="ru">Бета</span><span class="en">Beta</span></span>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+    <a class="item p-constella" href="constella.html">
+      <div class="ic" aria-hidden="true"><img src="assets/constella-icon.webp" alt="" width="56" height="56" loading="lazy"></div>
+      <h3>Constella</h3>
+      <div class="what"><span class="ru">Фан-инструмент для Genshin Impact: мои персонажи, отряд и календарь патчей с метками достоверности.</span><span class="en">A fan tool for Genshin Impact: my characters, a team builder and a patch calendar with reliability labels.</span><span class="plat"><span class="ru">Неофициальный · из браузера</span><span class="en">Unofficial · from the browser</span></span></div>
+      <span class="chip wip"><span class="ru">Фан-проект</span><span class="en">Fan project</span></span>
       <span class="arr" aria-hidden="true">→</span>
     </a>
     <a class="item p-selfaware" href="selfaware.html">
