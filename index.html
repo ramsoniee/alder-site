@@ -256,26 +256,27 @@ html[lang="en"] body.p-constella .phone span.ru,html[lang="ru"] body.p-constella
 @media (max-width:700px){.combo{flex-wrap:wrap;gap:10px}.combo .c-main{order:-1;flex:0 0 100%;width:100%}.combo .c-tar,.combo .c-al,.combo .c-co,.combo .c-sa{flex:0 0 calc(25% - 8px);width:calc(25% - 8px);aspect-ratio:1/1.7;align-self:flex-start}}
 .chip{max-width:100%}@media (max-width:560px){.chip{white-space:normal;line-height:1.4}}
 
-/* ---------- showcase carousel (light) ---------- */
-.cv-wrap{padding:clamp(8px,2vw,24px) 0 clamp(40px,7vw,90px)}
-.cv{--w:clamp(270px,66vw,440px);position:relative;max-width:1200px;margin:0 auto;overflow:hidden;overflow:clip;touch-action:pan-y;user-select:none}
-.cv-ring{position:relative;width:var(--w);height:calc(var(--w)*.64 + 112px);margin:0 auto;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.2,.75,.2,1);cursor:grab}
+/* ---------- showcase carousel (light, large) ---------- */
+.cv-wrap{padding:clamp(4px,1.5vw,16px) 0 clamp(40px,7vw,90px)}
+.cv{--w:clamp(300px,86vw,880px);position:relative;max-width:1400px;margin:0 auto;overflow:hidden;overflow:clip;touch-action:pan-y;user-select:none}
+.cv-ring{position:relative;width:var(--w);height:calc(var(--w)*.5625 + 118px);margin:0 auto;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.2,.75,.2,1);cursor:grab}
 .cv-ring.drag{transition:none;cursor:grabbing}
 .cv-card{position:absolute;inset:0;display:block;text-decoration:none;color:inherit;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:opacity .9s}
-.cv-stage{position:relative;height:calc(var(--w)*.64);border-radius:28px;overflow:hidden;
-  background:linear-gradient(160deg,color-mix(in srgb,var(--a) 17%,var(--bg)),color-mix(in srgb,var(--b) 14%,var(--bg)));
-  border:1px solid var(--line);box-shadow:0 24px 40px -30px rgba(30,40,35,.35)}
-.cv-stage .scr{position:absolute;left:50%;top:13%;height:100%;transform:translateX(-50%);border-radius:22px 22px 0 0;overflow:hidden;background:var(--surface);box-shadow:0 0 0 1px rgba(0,0,0,.1),0 14px 30px -14px rgba(0,0,0,.3)}
-.cv-stage .scr img{display:block;height:auto;width:calc(var(--w)*.3);max-width:none}
+.cv-stage{position:relative;height:calc(var(--w)*.5625);border-radius:clamp(20px,3vw,34px);overflow:hidden;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--a) 20%,var(--bg)),color-mix(in srgb,var(--b) 22%,var(--bg)));
+  border:1px solid var(--line);box-shadow:0 30px 50px -34px rgba(30,40,35,.4)}
+.cv-stage .scr{position:absolute;top:9%;width:30%;border-radius:clamp(12px,1.8vw,22px) clamp(12px,1.8vw,22px) 0 0;overflow:hidden;background:var(--surface);box-shadow:0 0 0 1px rgba(0,0,0,.1),0 18px 36px -16px rgba(0,0,0,.35)}
+.cv-stage .scr img{display:block;width:100%;height:auto}
+.cv-stage .s1{left:5%;top:12%}.cv-stage .s2{left:35%;top:6%}.cv-stage .s3{left:65%;top:12%}
 html[lang="en"] .cv-stage .scr img.ru,html[lang="ru"] .cv-stage .scr img.en{display:none}
-.cv-stage .win{position:absolute;left:9%;right:9%;top:15%;border-radius:14px 14px 0 0;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.1),0 14px 30px -14px rgba(0,0,0,.3)}
-.cv-stage .win .bar{display:flex;gap:6px;padding:8px 12px;background:#efeae0}
-.cv-stage .win .bar i{width:8px;height:8px;border-radius:50%;background:#d3cab9;display:block}
+.cv-stage .win{position:absolute;left:5%;right:5%;top:9%;border-radius:14px 14px 0 0;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.1),0 18px 36px -16px rgba(0,0,0,.35)}
+.cv-stage .win .bar{display:flex;gap:6px;padding:9px 14px;background:#efeae0}
+.cv-stage .win .bar i{width:9px;height:9px;border-radius:50%;background:#d3cab9;display:block}
 .cv-stage .win img{display:block;width:100%;height:auto}
 .cv-cap{display:grid;gap:4px;justify-items:center;text-align:center;padding-top:20px}
-.cv-cap b{font-family:var(--f-display);font-weight:400;font-size:clamp(1.4rem,3vw,1.75rem);color:var(--ink)}
-.cv-cap>span{font-size:.95rem;color:var(--muted);max-width:32ch}
-.cv-cap em{font:.7rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;font-style:normal;margin-top:8px;color:var(--muted)}
+.cv-cap b{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,3vw,2rem);color:var(--ink)}
+.cv-cap>span{font-size:1rem;color:var(--muted);max-width:36ch}
+.cv-cap em{font:.72rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;font-style:normal;margin-top:8px;color:var(--muted)}
 .cv-card.is-main .cv-cap em{color:var(--pa,var(--ink));font-weight:600}
 .cv-ctl{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:26px}
 .cv-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:1rem;cursor:pointer;transition:color .2s,border-color .2s}
@@ -283,7 +284,7 @@ html[lang="en"] .cv-stage .scr img.ru,html[lang="ru"] .cv-stage .scr img.en{disp
 .cv-dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
 .cv-dots button{border:0;padding:6px 10px;min-height:32px;border-radius:999px;background:transparent;color:var(--muted);font:.76rem/1 var(--f-mono);letter-spacing:.03em;cursor:pointer;transition:color .3s}
 .cv-dots button[aria-current="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink);border-radius:0}
-@media (max-width:560px){.cv-stage{border-radius:22px}.cv-dots button{padding:6px 7px;font-size:.7rem}}
+@media (max-width:560px){.cv-dots button{padding:6px 7px;font-size:.7rem}}
 @media (prefers-reduced-motion:reduce){.cv-ring,.cv-card{transition:none}}
 
 </style>
@@ -299,9 +300,9 @@ html[lang="en"] .cv-stage .scr img.ru,html[lang="ru"] .cv-stage .scr img.en{disp
 
 <section class="hero single" style="padding-bottom:clamp(8px,2vw,24px)">
   <div>
-    <span class="chip live"><span class="ru">Один разработчик, четыре продукта и фан-проект</span><span class="en">One developer, four products and a fan project</span></span>
+    <span class="chip live"><span class="ru">Один разработчик, пять проектов</span><span class="en">One developer, five projects</span></span>
     <h1 style="font-size:clamp(2.1rem,4.8vw,3.7rem)"><span class="ru">Делаю программы <em>целиком</em>: от интерфейса до сервера.</span><span class="en">I build software <em>end to end</em>, from interface to server.</span></h1>
-    <p class="lead"><span class="ru">Alder — студия одного разработчика. Есть главный продукт, который постоянно развивается, второй в бета-версии, личный альбом натуралиста «для души» и прототип, который пока проверяю на себе.</span><span class="en">Alder is a one-person studio. One flagship product that keeps evolving, a second one in beta, a naturalist’s album made for the joy of it, and a prototype I am still testing on myself.</span></p>
+    <p class="lead"><span class="ru">Alder — студия одного разработчика. Один главный продукт, который постоянно развивается, и ещё четыре проекта: дневник питания в бета-версии, альбом натуралиста, фан-инструмент для Genshin Impact и прототип, который я проверяю на себе.</span><span class="en">Alder is a one-person studio. One flagship product that keeps evolving and four more projects: a food diary in beta, a naturalist’s album, a fan tool for Genshin Impact and a prototype I am testing on myself.</span></p>
     <div class="row">
       <a class="btn" href="cozydub.html"><span class="ru">Смотреть CozyDub</span><span class="en">See CozyDub</span></a>
       <a class="btn ghost" href="#projects"><span class="ru">Все проекты</span><span class="en">All projects</span></a>
@@ -312,24 +313,24 @@ html[lang="en"] .cv-stage .scr img.ru,html[lang="ru"] .cv-stage .scr img.en{disp
 <section class="cv-wrap" aria-label="Projects">
 <div class="cv" id="cv" role="region" aria-roledescription="carousel">
   <div class="cv-ring" id="cvRing">
-    <a class="cv-card is-main" href="cozydub.html" data-name="CozyDub" style="--a:#1f6f66;--b:#8fd3c8">
+    <a class="cv-card is-main" href="cozydub.html" data-name="CozyDub" style="--a:#1f6f66;--b:#4fae9f">
       <div class="cv-stage"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="assets/cozydub-studio2.webp" alt="" width="1568" height="736" loading="lazy"></div></div>
       <div class="cv-cap"><b>CozyDub</b><span><span class="ru">Дубляж и видео. Мой основной проект.</span><span class="en">Dubbing and video. My main project.</span></span><em><span class="ru">Основной проект · v1.97</span><span class="en">Main project · v1.97</span></em></div>
     </a>
-    <a class="cv-card" href="tarelka.html" data-name="Tarelka" style="--a:#b6613f;--b:#f2b99d">
-      <div class="cv-stage"><div class="scr s1"><img class="theme-light " src="assets/tarelka-v16-today.webp" alt="" loading="lazy"><img class="theme-dark " src="assets/tarelka-v16-today-dark.webp" alt="" loading="lazy"></div></div>
+    <a class="cv-card " href="tarelka.html" data-name="Tarelka" style="--a:#b6613f;--b:#e39a77">
+      <div class="cv-stage"><div class="scr s1"><img class="theme-light" src="assets/tarelka-v16-today.webp" alt="" loading="lazy"><img class="theme-dark" src="assets/tarelka-v16-today-dark.webp" alt="" loading="lazy"></div><div class="scr s2"><img class="theme-light" src="assets/tarelka-v16-insights.webp" alt="" loading="lazy"><img class="theme-dark" src="assets/tarelka-v16-insights-dark.webp" alt="" loading="lazy"></div><div class="scr s3"><img class="theme-light" src="assets/tarelka-v16-summary.webp" alt="" loading="lazy"><img class="theme-dark" src="assets/tarelka-v16-summary-dark.webp" alt="" loading="lazy"></div></div>
       <div class="cv-cap"><b>Tarelka</b><span><span class="ru">Дневник питания без цифр и чувства вины.</span><span class="en">A food diary without numbers and guilt.</span></span><em><span class="ru">Бета · v1.6</span><span class="en">Beta · v1.6</span></em></div>
     </a>
-    <a class="cv-card" href="alder-app.html" data-name="Alder" style="--a:#3d5230;--b:#b5cc98">
-      <div class="cv-stage"><div class="scr s1"><img class="theme-light " src="assets/alder-app-catalog.webp" alt="" loading="lazy"><img class="theme-dark " src="assets/alder-app-catalog-dark.webp" alt="" loading="lazy"></div></div>
+    <a class="cv-card " href="alder-app.html" data-name="Alder" style="--a:#3d5230;--b:#8aa56a">
+      <div class="cv-stage"><div class="scr s1"><img class="theme-light" src="assets/alder-app-catalog.webp" alt="" loading="lazy"><img class="theme-dark" src="assets/alder-app-catalog-dark.webp" alt="" loading="lazy"></div><div class="scr s2"><img class="theme-light" src="assets/alder-app-card.webp" alt="" loading="lazy"><img class="theme-dark" src="assets/alder-app-card-dark.webp" alt="" loading="lazy"></div><div class="scr s3"><img class="theme-light" src="assets/alder-app-near.webp" alt="" loading="lazy"><img class="theme-dark" src="assets/alder-app-near-dark.webp" alt="" loading="lazy"></div></div>
       <div class="cv-cap"><b>Alder</b><span><span class="ru">Альбом натуралиста в телефоне.</span><span class="en">A naturalist’s album in your phone.</span></span><em><span class="ru">Бета</span><span class="en">Beta</span></em></div>
     </a>
-    <a class="cv-card" href="constella.html" data-name="Constella" style="--a:#162447;--b:#c9a24b">
-      <div class="cv-stage"><div class="scr s1"><img class="ru " src="assets/constella-mine-ru.webp" alt="" loading="lazy"><img class="en " src="assets/constella-mine-en.webp" alt="" loading="lazy"></div></div>
+    <a class="cv-card " href="constella.html" data-name="Constella" style="--a:#162447;--b:#c9a24b">
+      <div class="cv-stage"><div class="scr s1"><img class="ru" src="assets/constella-mine-ru.webp" alt="" loading="lazy"><img class="en" src="assets/constella-mine-en.webp" alt="" loading="lazy"></div><div class="scr s2"><img class="ru" src="assets/constella-ref-ru.webp" alt="" loading="lazy"><img class="en" src="assets/constella-ref-en.webp" alt="" loading="lazy"></div><div class="scr s3"><img class="ru" src="assets/constella-patch-ru.webp" alt="" loading="lazy"><img class="en" src="assets/constella-patch-en.webp" alt="" loading="lazy"></div></div>
       <div class="cv-cap"><b>Constella</b><span><span class="ru">Фан-инструмент для Genshin Impact.</span><span class="en">A fan tool for Genshin Impact.</span></span><em><span class="ru">Фан-проект</span><span class="en">Fan project</span></em></div>
     </a>
-    <a class="cv-card" href="selfaware.html" data-name="selfaware" style="--a:#1f5a66;--b:#8fcad3">
-      <div class="cv-stage"><div class="scr s1"><img class="" src="assets/selfaware-today.webp" alt="" loading="lazy"></div></div>
+    <a class="cv-card " href="selfaware.html" data-name="selfaware" style="--a:#1f5a66;--b:#5fa8b5">
+      <div class="cv-stage"><div class="scr s1"><img src="assets/selfaware-today.webp" alt="" loading="lazy"></div><div class="scr s2"><img src="assets/selfaware-health.webp" alt="" loading="lazy"></div><div class="scr s3"><img src="assets/selfaware-journal.webp" alt="" loading="lazy"></div></div>
       <div class="cv-cap"><b>selfaware</b><span><span class="ru">Восстановление и сон по пульсу.</span><span class="en">Recovery and sleep from heart rate.</span></span><em><span class="ru">В разработке</span><span class="en">In development</span></em></div>
     </a>
   </div>
@@ -476,7 +477,7 @@ html[lang="en"] .cv-stage .scr img.ru,html[lang="ru"] .cv-stage .scr img.en{disp
       c.addEventListener('click',function(e){ if(i!==cur){ e.preventDefault(); go(i,true); } });
     });
     function layout(){
-      var w=ring.offsetWidth; R=Math.round((w/2)/Math.tan(Math.PI/n))+Math.round(w*.2);
+      var w=ring.offsetWidth; R=Math.round((w/2)/Math.tan(Math.PI/n))+Math.round(w*.12);
       cv.style.perspective=Math.round(Math.max(1500,R*4.2))+'px';
       cards.forEach(function(c,i){ c.style.transform='rotateY('+(i*step)+'deg) translateZ('+R+'px)'; });
       paint();
