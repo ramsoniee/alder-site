@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Только когда никто не смотрит · Only When No One's Watching</title>
+<meta name="description" content="Визуальная новелла о стипендиатке, капитане команды и тайне, которую знают только ночью. Играть в браузере. / A visual novel about a scholarship student, the team captain and a secret that only exists at night.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f111a;--panel:#181b28;--line:#2a2e42;--cream:#f4e9d8;--muted:#a9a79f;--acc:#e8b88a;--acc2:#c9805a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:'PT Sans',system-ui,sans-serif;font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:700;line-height:1.12}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:20;background:linear-gradient(#0f111aee,#0f111a00);backdrop-filter:blur(2px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+.nav a.home{font-family:'Playfair Display',serif;font-weight:700;text-decoration:none;font-size:20px;color:var(--cream)}
+.nav .links{display:flex;gap:20px;align-items:center;font-size:15px}
+.nav .links a{text-decoration:none;color:var(--muted)}
+.nav .links a:hover{color:var(--cream)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--muted);padding:5px 12px;font:inherit;font-size:14px;cursor:pointer}
+.lang button.on{background:var(--acc);color:#1a1410;font-weight:700}
+@media(max-width:640px){.nav .links a.hide{display:none}.nav a.home{font-size:15px;max-width:9em;line-height:1.15}}
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:url(img/bg_title_campus.jpg) center/cover;transform:scale(1.05);animation:drift 28s ease-in-out infinite alternate}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0f111a55 0%,#0f111a99 45%,#0f111a 100%)}
+@keyframes drift{to{transform:scale(1.14) translateX(-1.5%)}}
+.hero .wrap{position:relative;z-index:2;padding-bottom:9vh;padding-top:110px}
+.kicker{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:14px}
+.hero h1{font-size:clamp(40px,8vw,92px);max-width:11em}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--acc)}
+.hero p.lead{font-size:clamp(18px,2.4vw,23px);color:var(--cream);max-width:34em;margin:20px 0 28px;opacity:.92}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;text-decoration:none;padding:14px 26px;border-radius:999px;font-weight:700;font-size:17px;border:1px solid var(--acc);transition:.2s}
+.btn.main{background:var(--acc);color:#1a1410}
+.btn.main:hover{background:#f2c9a3;transform:translateY(-1px)}
+.btn.ghost{color:var(--acc)}
+.btn.ghost:hover{background:#e8b88a1a}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.tags span{font-size:13px;color:var(--muted);border:1px solid var(--line);padding:3px 11px;border-radius:999px}
+/* sections */
+section{padding:92px 0}
+section h2{font-size:clamp(30px,5vw,50px);margin-bottom:18px}
+.sub{color:var(--muted);max-width:40em;margin-bottom:34px}
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:center}
+.about blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(24px,3.4vw,34px);line-height:1.3;color:var(--acc);border-left:3px solid var(--acc2);padding-left:22px}
+.about p+p{margin-top:14px}
+@media(max-width:820px){.about{grid-template-columns:1fr}}
+/* cast */
+.cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 14px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:var(--acc2)}
+.card img{height:270px;width:auto;object-fit:contain;filter:drop-shadow(0 8px 14px #0008)}
+.card h3{font-size:21px}
+.card .role{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.card p{font-size:15px;color:var(--muted);line-height:1.45}
+/* gallery */
+.gal{columns:3 260px;column-gap:14px}
+.gal figure{break-inside:avoid;margin-bottom:14px;position:relative;cursor:zoom-in;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.gal img{width:100%;transition:transform .5s}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;font-size:14px;background:linear-gradient(transparent,#0f111aee);opacity:0;transition:.25s}
+.gal figure:hover figcaption{opacity:1}
+@media(hover:none){.gal figcaption{opacity:1}}
+/* features */
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.feat div{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 22px}
+.feat b{display:block;font-family:'Playfair Display',serif;font-size:42px;color:var(--acc);line-height:1}
+.feat h3{font-size:21px;margin:10px 0 6px}
+.feat p{font-size:15.5px;color:var(--muted)}
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.facts div{padding:20px 22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:-1px -1px 0 0}
+.facts small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:4px}
+/* cta */
+.cta{text-align:center;position:relative;background:url(img/bg_courtyard_evening.jpg) center/cover}
+.cta::before{content:"";position:absolute;inset:0;background:#0f111ad9}
+.cta .wrap{position:relative}
+.cta h2{max-width:14em;margin:0 auto 14px}
+.cta .btns{justify-content:center;margin-top:24px}
+footer{padding:34px 0 44px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+/* lightbox */
+#lb{position:fixed;inset:0;background:#05060ae8;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-height:92vh;max-width:96vw;border-radius:10px}
+.rv{opacity:0;transform:translateY(18px);transition:.7s}
+.rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="home" href="#top">Only When No One's Watching</a>
+  <div class="links">
+    <a class="hide" href="#story" data-ru="История" data-en="Story">История</a>
+    <a class="hide" href="#cast" data-ru="Герои" data-en="Cast">Герои</a>
+    <a class="hide" href="#gallery" data-ru="Кадры" data-en="Gallery">Кадры</a>
+    <a class="hide" href="https://alder.studio/">Alder</a>
+    <div class="lang"><button id="bRu" class="on">RU</button><button id="bEn">EN</button></div>
+  </div>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <div class="kicker" data-ru="Визуальная новелла · Часть 1" data-en="Visual novel · Part 1">Визуальная новелла · Часть 1</div>
+  <h1><span data-ru="Только когда <em>никто не смотрит</em>" data-en="Only When <em>No One's Watching</em>">Только когда <em>никто не смотрит</em></span></h1>
+  <p class="lead" data-ru="Днём он смеётся над ней вместе со всей командой. Ночью приходит сам. Университет Ховберри, одна неделя, и каждый выбор остаётся с тобой." data-en="By day he laughs at her with the whole team. By night he shows up alone. Hawberry University, one week, and every choice stays with you.">Днём он смеётся над ней вместе со всей командой. Ночью приходит сам. Университет Ховберри, одна неделя, и каждый выбор остаётся с тобой.</p>
+  <div class="btns">
+    <a class="btn main" href="https://ramsonie.itch.io/only-when-no-ones-watching" data-ru="Играть бесплатно" data-en="Play for free">Играть бесплатно</a>
+    <a class="btn ghost" href="#story" data-ru="Об истории" data-en="About the story">Об истории</a>
+  </div>
+  <div class="tags"><span data-ru="Играть в браузере" data-en="Plays in browser">Играть в браузере</span><span data-ru="Романтика" data-en="Romance">Романтика</span><span data-ru="Драма" data-en="Drama">Драма</span><span data-ru="Несколько веток" data-en="Branching story">Несколько веток</span><span data-ru="Русский язык" data-en="Russian text">Русский язык</span></div>
+</div></div>
+
+<section id="story"><div class="wrap about">
+  <div class="rv">
+    <h2 data-ru="Неделя, после которой всё иначе" data-en="One week that changes everything">Неделя, после которой всё иначе</h2>
+    <p data-ru="Элли Харт приезжает в Ховберри первокурсницей на стипендии. Ей нужен грант профессора Бреннана и тихие места в архиве. Совсем не нужен Лукас Рид: капитан команды, номер 10, сын попечителя, который не замечает её на людях." data-en="Elli Hart arrives at Hawberry as a first-year on a scholarship. She needs Professor Brennan's grant and quiet corners of the archive. She does not need Lukas Reed: team captain, number 10, a trustee's son who pretends not to know her in public.">Элли Харт приезжает в Ховберри первокурсницей на стипендии. Ей нужен грант профессора Бреннана и тихие места в архиве. Совсем не нужен Лукас Рид: капитан команды, номер 10, сын попечителя, который не замечает её на людях.</p>
+    <p data-ru="Ты ведёшь Элли от вторника до понедельника: паб, лекция, ночная библиотека, матч, вечеринка. Кому доверять, что говорить вслух, а что оставить для темноты, решаешь ты." data-en="You guide Elli from Tuesday to Monday: the pub, the lecture, the night library, the match, the party. Whom to trust, what to say out loud and what to keep for the dark is up to you.">Ты ведёшь Элли от вторника до понедельника: паб, лекция, ночная библиотека, матч, вечеринка. Кому доверять, что говорить вслух, а что оставить для темноты, решаешь ты.</p>
+  </div>
+  <blockquote class="rv" data-ru="«Днём он смеётся над ней вместе со всей командой. Ночью приходит сам.»" data-en="“By day he laughs at her with the whole team. By night he shows up alone.”">«Днём он смеётся над ней вместе со всей командой. Ночью приходит сам.»</blockquote>
+</div></section>
+
+<section id="cast" style="background:#0c0e16"><div class="wrap">
+  <h2 data-ru="Герои" data-en="Characters">Герои</h2>
+  <p class="sub" data-ru="Семь людей, у каждого своя игра и своя цена." data-en="Seven people, each with their own game and their own price.">Семь людей, у каждого своя игра и своя цена.</p>
+  <div class="cast">
+    <div class="card rv"><img src="img/elli.webp" alt="Elli" loading="lazy"><div class="role" data-ru="Героиня" data-en="Heroine">Героиня</div><h3 data-ru="Элли Харт" data-en="Elli Hart">Элли Харт</h3><p data-ru="Стипендиатка из Милбрука. Наблюдательная, упрямая, не любит просить." data-en="A scholarship student from Millbrook. Observant, stubborn, hates asking for help.">Стипендиатка из Милбрука. Наблюдательная, упрямая, не любит просить.</p></div>
+    <div class="card rv"><img src="img/lukas.webp" alt="Lukas" loading="lazy"><div class="role" data-ru="Капитан" data-en="Captain">Капитан</div><h3 data-ru="Лукас Рид" data-en="Lukas Reed">Лукас Рид</h3><p data-ru="Квотербек, номер 10. На людях лёд, наедине кто-то другой." data-en="Quarterback, number 10. Ice in public, someone else in private.">Квотербек, номер 10. На людях лёд, наедине кто-то другой.</p></div>
+    <div class="card rv"><img src="img/dan.webp" alt="Dan" loading="lazy"><div class="role" data-ru="Тёплый свет" data-en="Warm light">Тёплый свет</div><h3 data-ru="Дэн" data-en="Dan">Дэн</h3><p data-ru="Игрок второго состава в очках. Добрый, внимательный и слишком честный для этой команды." data-en="A second-string player in glasses. Kind, attentive and too honest for this team.">Игрок второго состава в очках. Добрый, внимательный и слишком честный для этой команды.</p></div>
+    <div class="card rv"><img src="img/maya.webp" alt="Maya" loading="lazy"><div class="role" data-ru="Подруга" data-en="Friend">Подруга</div><h3 data-ru="Майя" data-en="Maya">Майя</h3><p data-ru="Студгазета, камера, язык острее ножа. Знает про кампус больше, чем говорит." data-en="Student paper, camera, a tongue sharper than a knife. Knows more about the campus than she says.">Студгазета, камера, язык острее ножа. Знает про кампус больше, чем говорит.</p></div>
+    <div class="card rv"><img src="img/henry.webp" alt="Henry" loading="lazy"><div class="role" data-ru="Тень команды" data-en="Team shadow">Тень команды</div><h3 data-ru="Генри" data-en="Henry">Генри</h3><p data-ru="Правая рука Лукаса. Усмешка, ставки и слухи." data-en="Lukas's right hand. Smirks, bets and rumours.">Правая рука Лукаса. Усмешка, ставки и слухи.</p></div>
+    <div class="card rv"><img src="img/chloe.webp" alt="Chloe" loading="lazy"><div class="role" data-ru="Соперница" data-en="Rival">Соперница</div><h3 data-ru="Хлоя" data-en="Chloe">Хлоя</h3><p data-ru="Королева вечеринок. Улыбается, когда бьёт." data-en="Queen of the parties. Smiles when she strikes.">Королева вечеринок. Улыбается, когда бьёт.</p></div>
+    <div class="card rv"><img src="img/brennan.webp" alt="Professor Brennan" loading="lazy"><div class="role" data-ru="Профессор" data-en="Professor">Профессор</div><h3 data-ru="Бреннан" data-en="Brennan">Бреннан</h3><p data-ru="Философия и гранты. Любит правила, ещё больше любит парадоксы." data-en="Philosophy and grants. Loves rules, loves paradoxes even more.">Философия и гранты. Любит правила, ещё больше любит парадоксы.</p></div>
+  </div>
+</div></section>
+
+<section id="gallery"><div class="wrap">
+  <h2 data-ru="Кадры из игры" data-en="From the game">Кадры из игры</h2>
+  <p class="sub" data-ru="Нажми на картинку, чтобы открыть крупнее. Здесь нет спойлеров к концовкам." data-en="Tap an image to enlarge it. No ending spoilers here.">Нажми на картинку, чтобы открыть крупнее. Здесь нет спойлеров к концовкам.</p>
+  <div class="gal" id="gal">
+    <figure class="rv"><img src="img/cg_arrival_gates.jpg" alt="" loading="lazy"><figcaption data-ru="У ворот Ховберри" data-en="At the Hawberry gates">У ворот Ховберри</figcaption></figure>
+    <figure class="rv"><img src="img/cg_library_maya_hides.jpg" alt="" loading="lazy"><figcaption data-ru="Команда за окном библиотеки" data-en="The team outside the library window">Команда за окном библиотеки</figcaption></figure>
+    <figure class="rv"><img src="img/bg_courtyard.jpg" alt="" loading="lazy"><figcaption data-ru="Двор днём" data-en="The courtyard by day">Двор днём</figcaption></figure>
+    <figure class="rv"><img src="img/bg_library_green.jpg" alt="" loading="lazy"><figcaption data-ru="Библиотека с зелёными лампами" data-en="The library of green lamps">Библиотека с зелёными лампами</figcaption></figure>
+    <figure class="rv"><img src="img/cg_pub_cider_touch.jpg" alt="" loading="lazy"><figcaption data-ru="Паб «Старый дуб»" data-en="The Old Oak pub">Паб «Старый дуб»</figcaption></figure>
+    <figure class="rv"><img src="img/cg_lecture_pen.jpg" alt="" loading="lazy"><figcaption data-ru="Лекция Бреннана" data-en="Brennan's lecture">Лекция Бреннана</figcaption></figure>
+    <figure class="rv"><img src="img/bg_cafeteria.jpg" alt="" loading="lazy"><figcaption data-ru="Столовая" data-en="The cafeteria">Столовая</figcaption></figure>
+    <figure class="rv"><img src="img/cg_field_touch_fence.jpg" alt="" loading="lazy"><figcaption data-ru="Поле перед матчем" data-en="The field before the match">Поле перед матчем</figcaption></figure>
+    <figure class="rv"><img src="img/cg_cafe_lighter.jpg" alt="" loading="lazy"><figcaption data-ru="Серебряная зажигалка" data-en="The silver lighter">Серебряная зажигалка</figcaption></figure>
+    <figure class="rv"><img src="img/cg_party_jealous.jpg" alt="" loading="lazy"><figcaption data-ru="Вечеринка" data-en="The party">Вечеринка</figcaption></figure>
+    <figure class="rv"><img src="img/bg_courtyard_evening.jpg" alt="" loading="lazy"><figcaption data-ru="Двор вечером" data-en="The courtyard at dusk">Двор вечером</figcaption></figure>
+    <figure class="rv"><img src="img/bg_field_match.jpg" alt="" loading="lazy"><figcaption data-ru="Стадион Ховберри" data-en="Hawberry stadium">Стадион Ховберри</figcaption></figure>
+  </div>
+</div></section>
+
+<section style="background:#0c0e16"><div class="wrap">
+  <h2 data-ru="Игра помнит, что ты сказал" data-en="The game remembers what you said">Игра помнит, что ты сказал</h2>
+  <p class="sub" data-ru="Ни одной шкалы на экране, но сцены её чувствуют." data-en="No meters on screen, but the scenes feel them.">Ни одной шкалы на экране, но сцены её чувствуют.</p>
+  <div class="feat">
+    <div class="rv"><b>47</b><h3 data-ru="Развилок" data-en="Choices">Развилок</h3><p data-ru="От одной реплики до решения, которое меняет всю неделю." data-en="From a single line to a decision that changes the whole week.">От одной реплики до решения, которое меняет всю неделю.</p></div>
+    <div class="rv"><b>3</b><h3 data-ru="Линии близости" data-en="Routes of closeness">Линии близости</h3><p data-ru="Лукас, Дэн и Майя. Каждая открывает свои сцены и свои последствия." data-en="Lukas, Dan and Maya. Each opens its own scenes and consequences.">Лукас, Дэн и Майя. Каждая открывает свои сцены и свои последствия.</p></div>
+    <div class="rv"><b>8</b><h3 data-ru="Скрытых шкал" data-en="Hidden meters">Скрытых шкал</h3><p data-ru="Близость, доверие, самоуважение, риск разоблачения. Игра их считает молча." data-en="Closeness, trust, self-respect, risk of exposure. The game counts them silently.">Близость, доверие, самоуважение, риск разоблачения. Игра их считает молча.</p></div>
+    <div class="rv"><b>≈24k</b><h3 data-ru="Слов текста" data-en="Words of text">Слов текста</h3><p data-ru="Диалоги, мысли героини, описания. Живые кадры, звук и музыка в тон сцене." data-en="Dialogue, inner thoughts, narration. Living frames, sound and music matched to each scene.">Диалоги, мысли героини, описания. Живые кадры, звук и музыка в тон сцене.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2 data-ru="Коротко об игре" data-en="At a glance">Коротко об игре</h2>
+  <div class="facts rv">
+    <div><small data-ru="Жанр" data-en="Genre">Жанр</small><span data-ru="Визуальная новелла, романтическая драма" data-en="Visual novel, romantic drama">Визуальная новелла, романтическая драма</span></div>
+    <div><small data-ru="Время" data-en="Length">Время</small><span data-ru="Около 1,5–2 часов" data-en="About 1.5–2 hours">Около 1,5–2 часов</span></div>
+    <div><small data-ru="Платформа" data-en="Platform">Платформа</small><span data-ru="Браузер, ПК и телефон" data-en="Browser, PC and phone">Браузер, ПК и телефон</span></div>
+    <div><small data-ru="Язык" data-en="Language">Язык</small><span data-ru="Русский" data-en="Russian">Русский</span></div>
+    <div><small data-ru="Возраст" data-en="Audience">Возраст</small><span data-ru="Рекомендуется 16+" data-en="Recommended 16+">Рекомендуется 16+</span></div>
+    <div><small data-ru="Статус" data-en="Status">Статус</small><span data-ru="Часть 1, публичная бета" data-en="Part 1, public beta">Часть 1, публичная бета</span></div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap rv">
+  <h2 data-ru="Выбери, что Элли скажет вслух" data-en="Choose what Elli says out loud">Выбери, что Элли скажет вслух</h2>
+  <p class="sub" style="margin:0 auto" data-ru="Бета бесплатная. Расскажи, что понравилось и где споткнулась история, это поможет второй части." data-en="The beta is free. Tell me what worked and where the story stumbled, it will help Part 2.">Бета бесплатная. Расскажи, что понравилось и где споткнулась история, это поможет второй части.</p>
+  <div class="btns"><a class="btn main" href="https://ramsonie.itch.io/only-when-no-ones-watching" data-ru="Играть на itch.io" data-en="Play on itch.io">Играть на itch.io</a><a class="btn ghost" href="https://alder.studio/" data-ru="Другие проекты студии" data-en="More from the studio">Другие проекты студии</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <span>© Alder · <span data-ru="Часть 1 «Только когда никто не смотрит»" data-en="Part 1 of “Only When No One's Watching”">Часть 1 «Только когда никто не смотрит»</span></span>
+  <span><a href="https://alder.studio/">alder.studio</a> · <a href="https://ramsonie.itch.io/only-when-no-ones-watching">itch.io</a></span>
+</div></footer>
+
+<div id="lb"><img alt=""></div>
+
+<script>
+(function(){
+  var root=document.documentElement,bRu=document.getElementById('bRu'),bEn=document.getElementById('bEn');
+  function set(l){
+    root.classList.toggle('en',l==='en');root.lang=l;
+    document.querySelectorAll('[data-ru]').forEach(function(n){var t=n.getAttribute(l==='en'?'data-en':'data-ru');if(t!==null)n.innerHTML=t});
+    bRu.classList.toggle('on',l==='ru');bEn.classList.toggle('on',l==='en');
+    document.title=l==='en'?"Only When No One's Watching · visual novel":"Только когда никто не смотрит · визуальная новелла";
+    try{localStorage.setItem('ow-lang',l)}catch(e){}
+  }
+  var l='ru';
+  try{l=localStorage.getItem('ow-lang')||''}catch(e){}
+  if(!l)l=((navigator.language||'ru').toLowerCase().indexOf('ru')===0)?'ru':'en';
+  set(l);
+  bRu.onclick=function(){set('ru')};bEn.onclick=function(){set('en')};
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12}):null;
+  document.querySelectorAll('.rv').forEach(function(n){io?io.observe(n):n.classList.add('in')});
+  var lb=document.getElementById('lb'),li=lb.querySelector('img');
+  document.querySelectorAll('#gal img').forEach(function(i){i.parentNode.onclick=function(){li.src=i.src;lb.classList.add('on')}});
+  lb.onclick=function(){lb.classList.remove('on')};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on')});
+})();
+</script>
+</body>
+</html>
